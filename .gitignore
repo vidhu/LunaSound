@@ -1,0 +1,10 @@
+/cache
+/node_modules
+/release
+/src/bower_components
+/src/node_modules
+*.mp3
+*.m3u
+.idea
+.idea/
+.DS_Store
