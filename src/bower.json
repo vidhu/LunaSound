@@ -1,0 +1,47 @@
+{
+  "name": "luna-sound",
+  "description": "Youtube Music Player",
+  "main": "index.js",
+  "authors": [
+    "vidhu"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Youtube",
+    "Music",
+    "Player"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "components-font-awesome": "^4.6.3",
+    "angular": "1.5.7",
+    "angular-ui-router": "^0.3.1",
+    "angularjs-slider": "^4.0.2",
+    "angular-audio": "^1.7.2",
+    "lodash": "^4.13.1",
+    "angular-youtube-mb": "^1.2.0",
+    "angular-bootstrap-contextmenu": "^0.9.7",
+    "json-formatter": "^0.6.0",
+    "angular-ui-sortable": "^0.14.3",
+    "jquery": "<3.0.0",
+    "angular-sanitize": "^1.5.7",
+    "ng-dialog": "^0.6.2",
+    "angular-xeditable": "^0.2.0"
+  },
+  "overrides": {
+    "angular": {
+      "dependencies": {
+        "jquery": "*",
+        "jquery-ui": "*"
+      }
+    }
+  }
+}

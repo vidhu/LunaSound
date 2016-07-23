@@ -1,0 +1,156 @@
+.rzslider {
+    margin: 0 10px;
+}
+
+.rzslider .rz-pointer {
+    top: -5px;
+    z-index: 3;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background-color: #DCDADA;
+    border-radius: 8px;
+}
+
+.rzslider .rz-pointer:after {
+    content: none;
+}
+
+.rzslider .rz-bar {
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 6px;
+    background-color: #444444;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.rzslider .rz-bar.rz-selection {
+    z-index: 2;
+    background-color: #0085ff;
+    border-radius: 2px;
+}
+
+#media-ctrls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    position: absolute;
+    height: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.media-ctrl {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.media-ctrl > .img-btn {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 0 10px 0 10px;
+    cursor: pointer;
+}
+
+.media-play {
+    background-image: url("../img/media_play.png");
+}
+
+.media-pause {
+    background-image: url("../img/media_pause.png");
+}
+
+.media-prev {
+    background-image: url("../img/media_prev.png");
+}
+
+.media-next {
+    background-image: url("../img/media_next.png");
+}
+
+.media-loop {
+    background: url("../img/media_loop.png") 0 0;
+}
+
+.media-loop_on {
+    background: url("../img/media_loop.png") -24px 0;
+}
+
+.media-loop_on2 {
+    background: url("../img/media_loop.png") -48px 0;
+}
+
+.media-shuffle {
+    background: url("../img/media_shuffle.png") 0 0;
+}
+
+.media-shuffle_on {
+    background: url("../img/media_shuffle.png") 24px 0;
+}
+
+.media-progress {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.media-progress .time-current {
+    display: flex;
+    flex: 0 0 auto;
+    font-size: 0.75em;
+}
+
+.media-progress .time-total {
+    display: flex;
+    flex: 0 0 auto;
+    font-size: 0.75em;
+}
+
+.media-progress .progress-bar {
+    display: flex;
+    flex: 1;
+    margin: 0 10px;
+    height: 6px;
+    position: relative;
+}
+
+.media-progress .progress-bar > div {
+    border-radius: 3px;
+}
+
+.progress-bar-knob {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 16px;
+    height: 16px;
+    background-color: #DCDADA;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.progress-bar-fg {
+    position: absolute;
+    width: 33%;
+    height: 6px;
+    z-index: 1;
+    background-color: #0085ff;
+}
+
+.progress-bar-bg {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+
+    background-color: #444444;
+}

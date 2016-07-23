@@ -1,0 +1,65 @@
+#top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    position: absolute;
+    height: 50px;
+    top: 25px;
+    left: 0;
+    right: 0;
+}
+
+.top-ctrl {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.top-ctrl > span{
+    margin: 0 10px 0 10px;
+    cursor: pointer;
+}
+
+.search-box {
+    display: flex;
+    flex: 1 0 auto;
+}
+
+.search-box > i {
+    color: #1B1B1B;
+}
+
+.search-box > input{
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 30px;
+    padding-right: 15px;
+}
+
+.search-box .fa-times {
+    color: #2F2F2F;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.profile .profile-img {
+    margin: 0 10px;
+    border-radius: 49%;
+    overflow: hidden;
+}
+
+.profile span {
+    display: block;
+}
+
+.profile .fa {
+    display: block;
+    margin: 0 10px;
+}

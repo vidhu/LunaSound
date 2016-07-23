@@ -1,0 +1,46 @@
+<div id="media-ctrls" class="ui-panel">
+    <div class="media-ctrl">
+        <span ng-click="$ctrl.musicPrev()"
+                class="img-btn media-prev">
+        </span>
+
+        <span ng-click="$ctrl.musicPlayPause()"
+                   ng-class="{
+                    'media-play': $ctrl.sound.stat.paused,
+                    'media-pause': !$ctrl.sound.stat.paused
+                    }"
+                    class="img-btn">
+        </span>
+
+        <span ng-click="$ctrl.musicNext()"
+                class="img-btn media-next">
+        </span>
+    </div>
+
+    <div class="media-progress">
+        <span class="time-current">{{$ctrl.sound.stat.currentTime | trackTime}}</span>
+        <!--
+        <div class="progress-bar">
+            <div class="progress-bar-fg">
+                <div class="progress-bar-knob"></div>
+            </div>
+            <div class="progress-bar-bg"></div>
+        </div>
+        -->
+        <rzslider
+                rz-slider-model="$ctrl.progress"
+                rz-slider-options="$ctrl.sliderConfig"
+                rz-slider-tpl-url="app/shared/mediaControl/slider.template.html"
+        ></rzslider>
+        <span class="time-total">{{$ctrl.sound.stat.totalTime | trackTime}}</span>
+    </div>
+
+    <div class="media-ctrl">
+        <span ng-click="$ctrl.repeat()"
+              ng-class="$ctrl.plopt.repeat == 0 ? 'media-loop' : ($ctrl.plopt.repeat == 1 ? 'media-loop_on' : 'media-loop_on2')"
+                class="img-btn"></span>
+        <span ng-click="$ctrl.shuffle()"
+              ng-class="$ctrl.plopt.shuffle ? 'media-shuffle_on' : 'media-shuffle'"
+                class="img-btn"></span>
+    </div>
+</div>

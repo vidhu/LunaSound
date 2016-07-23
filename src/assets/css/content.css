@@ -1,0 +1,89 @@
+h1 {
+    margin: 0;
+}
+
+#content {
+    position: absolute;
+
+    top: 75px;
+    right: 0px;
+    bottom: 50px;
+    left: 200px;
+
+    background-color: #1d1d1d;
+
+    padding: 25px;
+
+    color: #f9f9f9;
+
+    overflow-y: scroll;
+}
+
+.songlist {
+    width: 100%;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
+}
+
+.songlist .song-item {
+    cursor: pointer;
+    display: block;
+    padding: 8px 8px;
+    border-bottom: solid 1px #333;
+}
+
+.songlist .song-item:hover {
+    background-color: #333;
+}
+
+.songlist .playing {
+    color: #00b3ee;
+}
+
+.track-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.track-table .playing {
+    color: #00b3ee;
+}
+
+.track-table th {
+    text-align: left;
+    color: #a2a2a2;
+    font-weight: normal;
+    font-size: 14px;
+    letter-spacing: 3px;
+    padding: 10px 0;
+}
+
+.track-table th:last-of-type {
+    text-align: right;
+}
+
+.track-table tbody tr {
+    border-top: 1px solid #333;
+    cursor: pointer;
+}
+
+.track-table tbody tr:hover {
+    background-color: #444;
+}
+
+.track-table td {
+    padding: 10px 0;
+}
+
+.track-table td:last-of-type {
+    text-align: right;
+}
+
+.drag {
+    box-shadow: 0px 0px 16px #80ccff;
+}

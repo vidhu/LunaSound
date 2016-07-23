@@ -1,0 +1,36 @@
+<h1>Search Results for {{$ctrl.searchTerm}}</h1>
+
+<div class="searchResults">
+    <div class="videoResult" ng-repeat="video in $ctrl.searchResults">
+        <div class="video">
+            <iframe id="ytplayer" type="text/html" width="213" height="120"
+                    src="{{$ctrl.getEmbedUrl(video.id.videoId)}}" frameborder="0"></iframe>
+        </div>
+        <div class="video-info">
+            <span class="title">{{video.snippet.title}}</span>
+            <span class="description">{{video.snippet.description}}</span>
+            <span class="download">
+                <button class="topcoat-button--cta"
+                        ng-click="$ctrl.download(video.id.videoId)">
+                    <span ng-if="$ctrl.downloadingFor[video.id.videoId]">Downloading</span>
+                    <span ng-if="!$ctrl.downloadingFor[video.id.videoId]">Add to Download Queue</span>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--
+<table>
+            <tbody>
+            <tr>
+                <td>
+                    <iframe id="ytplayer" type="text/html" width="213" height="120"
+                            src="https://www.youtube.com/embed/vlhhZIVhGw8" frameborder="0"></iframe>
+                </td>
+                <td class="info">
+                    <span class="title ng-binding">The Guest - Soundtrack 3 (Annie - Anthonio)</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+-->

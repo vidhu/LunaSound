@@ -1,0 +1,17 @@
+<div class="search-box inner-addon">
+    <i class="fa fa-search left-addon" aria-hidden="true"></i>
+    <input type="text" placeholder="Search"
+        ng-model="$ctrl.searchTerm"
+        ng-keydown="$ctrl.key($event)"
+        ng-change="$ctrl.searchBoxChange()"
+        ng-focus="$ctrl.searchBoxFocus()"
+        ng-blur="$ctrl.searchBoxBlur()">
+    <div class="results" ng-if="!$ctrl.hideSuggestion">
+        <ul>
+            <li ng-repeat="suggestion in $ctrl.searchSuggestions">
+                {{ suggestion }}
+            </li>
+        </ul>
+    </div>
+</div>
+<!--ng-if="$ctrl.searchTerm"-->

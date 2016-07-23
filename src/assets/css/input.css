@@ -1,0 +1,110 @@
+.inner-addon {
+    position: relative;
+}
+
+.inner-addon .fa {
+    position: absolute;
+    height: 16px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.left-addon {
+    left: 5px;
+}
+
+.right-addon {
+    right: 5px;
+}
+
+.left-addon input {
+    padding-left: 25px;
+}
+
+.right-addon input {
+    padding-right: 21px;
+}
+
+/* form starting stylings ------------------------------- */
+form .group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+form input {
+    font-size: 18px;
+    padding: 10px 10px 5px 5px;
+    display: block;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #757575;
+}
+
+form input:focus {
+    outline: none;
+}
+
+/* LABEL ======================================= */
+form label          {
+    color:#999;
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+}
+
+/* active state */
+form input:focus ~ label, input:valid ~ label     {
+    top:-20px;
+    font-size:14px;
+    color:rgb(16, 108, 200);
+}
+
+/* BOTTOM BARS ================================= */
+form .bar  { position:relative; display:block; width:300px; bottom: -2px;}
+form .bar:before, .bar:after   {
+    content:'';
+    height:2px;
+    width:0;
+    bottom:1px;
+    position:absolute;
+    background:rgb(16, 108, 200);
+    transition:0.2s ease all;
+}
+form .bar:before {
+    left:50%;
+}
+form .bar:after {
+    right:50%;
+}
+
+/* active state */
+form input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+form .highlight {
+    position:absolute;
+    height:60%;
+    width:100px;
+    top:25%;
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+}
+
+/* active state */
+form input:focus ~ .highlight {
+    animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@keyframes inputHighlighter {
+    from  { background:rgb(16, 108, 200); }
+    to    { width:0; background:transparent; }
+}

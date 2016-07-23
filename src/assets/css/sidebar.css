@@ -1,0 +1,75 @@
+#sidebar {
+    left: 0;
+    width: 200px;
+    position: absolute;
+    top: 75px;
+    bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar a {
+    color: #adafb2;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    color: #EEEEEE;
+    text-decoration: none;
+}
+
+
+.sidebar-menu-container {
+    display: flex;
+
+    flex: 1;
+
+    overflow: auto;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    margin-left: 15px;
+
+    min-height: min-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu input {
+    width: 100%;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.sidebar-menu>li{
+    margin-bottom: 30px;
+}
+
+.sidebar-menu .treeview-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu .treeview-menu>li>span {
+    display: block;
+    padding: 7px 5px 7px 0px;
+    cursor: pointer;
+}
+
+.sidebar-menu .treeview-menu>li>span>i {
+    margin-right: 9px;
+    width: 16px;
+}
+
+
+.sidebar-menu .treeview-menu>li .active {
+    color: #ffffff;
+}

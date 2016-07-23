@@ -1,0 +1,85 @@
+#download-queue {
+
+}
+
+
+#download-queue .item {
+    display: flex;
+    flex-direction: row;
+
+    height: 160px;
+    background-color: #2d2d2d;
+    content: ' ';
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#download-queue .video {
+    flex: 0 0 267px;
+    align-self: stretch;
+}
+
+#download-queue .divider-v {
+    flex: 0 0 0px;
+    align-self: stretch;
+    margin: 0 10px;
+
+    border-left: solid #464646 1px;
+    border-right: solid #191919 1px;
+}
+
+#download-queue .divider-h {
+    flex: 0 0 0px;
+    align-self: stretch;
+    margin: 10px 0;
+
+    border-top: solid #464646 1px;
+    border-bottom: solid #191919 1px;
+}
+
+#download-queue .flex-vert {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#download-queue .flex-hor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+#download-queue .status {
+    display: flex;
+    flex-direction: column;
+}
+
+#download-queue .console {
+    height: 100%;
+    background: #0a0a0a;
+    font-size: 13px;
+    font-family: consolas;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+#download-queue .console span {
+    display: block;
+}
+
+#download-queue .console span::first-letter {
+    font-weight: bold;
+    color: #288edf;
+}
+
+#download-queue .wait {
+
+}
+
+#download-queue .done {
+
+}

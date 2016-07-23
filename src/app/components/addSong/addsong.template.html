@@ -1,0 +1,91 @@
+<h1>Add Song</h1>
+<hr/>
+<input ng-model="$ctrl.youtubeURL"
+       type="text" class="topcoat-text-input" placeholder="Enter Youtube URL">
+<button class="topcoat-button--cta" ng-click="$ctrl.download()">Download</button>
+<br/>
+<br/>
+<div ng-if="$ctrl.youtubeURL">
+    <youtube-video
+            player-width="'213.33px'"
+            player-height="'120px'"
+            video-url="$ctrl.youtubeURL"></youtube-video>
+</div>
+<hr/>
+<h2>Queue</h2>
+<div id="download-queue">
+
+
+    <div class="item" ng-repeat="item in $ctrl.queue">
+        <youtube-video class="video"
+                       player-height="'100%'"
+                       video-url="item.media.URL">
+        </youtube-video>
+
+        <div class="divider-v"></div>
+
+        <div class="flex-vert">
+            <div class="tag">
+                <table>
+                    <tr>
+                        <td>Title</td>
+                        <td><input ng-model="item.metadata.title"
+                                type="text"
+                                class="topcoat-text-input" /></td>
+                    </tr>
+                    <tr>
+                        <td>Album</td>
+                        <td><input ng-model="item.metadata.album"
+                                   type="text" class="topcoat-text-input" /></td>
+                    </tr>
+                    <tr>
+                        <td>Artist</td>
+                        <td><input ng-model="item.metadata.artist"
+                                type="text" class="topcoat-text-input" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <select ng-model="item.playlist"
+                                    ng-options="pl as pl.name for pl in $ctrl.playlists">
+                                <option value="">--Choose playlist--</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="divider-h"></div>
+
+            <div class="flex-hor">
+                <!-- Cancel downloading/converting/tag-querying process -->
+                <span ng-if="item.status==0">
+                    <button ng-click="$ctrl.cancelQueue(item)"
+                            class="topcoat-button--cta">Cancel</button>
+                </span>
+
+                <!-- (Cancel tagging process/delete file) & (save media) -->
+                <span ng-if="item.status == 1">
+                    <button ng-click="$ctrl.cancelQueue(item)"
+                            class="topcoat-button--cta">Cancel</button>
+                    <button ng-click="$ctrl.saveMedia(item)"
+                            class="topcoat-button--cta">Save</button>
+                </span>
+
+                <!--  -->
+                <span ng-if="item.status == 2 || item.status == 4">
+                    <button ng-click="$ctrl.removeFromQueue(item)"
+                            class="topcoat-button--cta">Remove from Queue</button>
+                </span>
+            </div>
+
+        </div>
+
+        <div class="divider-v"></div>
+
+        <div class="flex-vert">
+            <div class="console">
+                <span ng-repeat="line in item.statusLog">&gt;&nbsp;{{line}}</span>
+            </div>
+        </div>
+    </div>
+</div>

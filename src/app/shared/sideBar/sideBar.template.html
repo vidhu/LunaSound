@@ -1,0 +1,102 @@
+<div id="sidebar" class="ui-panel">
+    <div class="sidebar-menu-container">
+        <ul class="sidebar-menu">
+            <li>
+                <a>Main</a>
+                <ul class="treeview-menu">
+                    <li>
+                        <span ui-sref-active="active" class="btn">
+                                <i class="fa fa-wifi" aria-hidden="true"></i>
+                                <a ui-sref="tracks({playlist:1})">Now Playing</a>
+                        </span>
+                    </li>
+                    <li>
+                            <span ui-sref-active="active" class="btn">
+                                <i class="fa fa-th-list" aria-hidden="true"></i>
+                                <a ui-sref="explore">Explore</a>
+                            </span>
+                    </li>
+                    <li>
+                            <span>
+                                <i class="fa fa-line-chart" aria-hidden="true"></i>
+                                <a>Trending</a>
+                            </span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a>Your Music</a>
+                <ul class="treeview-menu">
+                    <li>
+                                <span class="btn">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <a>Stared</a>
+                                </span>
+                    </li>
+                    <li>
+                                <span ui-sref-active="active" class="btn">
+                                    <i class="fa fa-server" aria-hidden="true"></i>
+                                    <a ui-sref="tracks({playlist:0})">All Music</a>
+                                </span>
+                    </li>
+                    <li>
+                                <span class="btn">
+                                    <i class="fa fa-music" aria-hidden="true"></i>
+                                    <a>Albums</a>
+                                </span>
+                    </li>
+                    <li>
+                                <span class="btn">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <a>Artists</a>
+                                </span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a>PlayLists</a>
+                <br/>
+                <ul class="treeview-menu">
+                    <li id="newPlaylistBox"
+                        ng-show="$ctrl.newPltxtboxVisible">
+                        <span class="btn">
+                            <input id="txtbox_newPlaylist" type="text" placeholder="New Playlist"
+                                   ng-model="$ctrl.newPLName"
+                                   ng-Keyup="$ctrl.keyPress($event)"/>
+                        </span>
+                    </li>
+                    <li ng-repeat="playlist in $ctrl.playlists | orderBy:'name'">
+                        <span ui-sref-active="active" context-menu="$ctrl.menuOptions" class="btn">
+                            <i ng-hide="plForm.$visible"
+                                ng-class="playlist.name == $ctrl.getCurrentPlaylistName() ? 'fa fa-volume-up' : 'fa fa-music'"
+                                aria-hidden="true">
+                            </i>
+
+                            <a ui-sref="tracks({playlist:playlist.id})"
+                               buttons="no"
+                               editable-text="playlist.name"
+                               onbeforesave="$ctrl.renamePlaylist(playlist, $data)"
+                               e-form="plForm">
+                                {{playlist.name}}
+                            </a>
+                        </span>
+                    </li>
+                    <li>
+                        <span id="btnNewPlaylist" class="btn"
+                              ng-click="$ctrl.showNewPltxtBox()">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            <a>New Playlist</a>
+                        </span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="add-music ui-panel">
+        <span class="btn">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            <a ui-sref="add-song">Add Song</a>
+        </span>
+    </div>
+</div>
