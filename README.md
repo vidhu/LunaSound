@@ -11,6 +11,7 @@ by Electron to concieve a beautiful responsive music player.
   - Auto Tagging support
 
 Planned Features
+- [ ] Cross Platform Support (Windows, Linux, OSX)
 - [ ] Last.fm integration
 - [ ] Frontpage for Tracks
 - [ ] Sync Tracks and Playlists to the cloud
