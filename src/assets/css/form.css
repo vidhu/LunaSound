@@ -1,0 +1,57 @@
+.luna-form {
+    margin: 0 100px 0 100px;
+}
+
+.luna-form .group {
+
+}
+
+.luna-form .group > .header {
+    padding: 10px 0;
+    border-bottom: solid #999 1px;
+}
+
+.luna-form .group > .header > .title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+.luna-form .group .sub-header {
+    padding: 20px 0 20px 0;
+}
+
+.luna-form .group .sub-header > .title {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.luna-form .group .content {
+    color: #999
+}
+
+.luna-form input {
+    font-size: 15px;
+    background-color: #383838;
+    margin-top: 10px;
+    padding: 7px;
+    border-bottom: none;
+    border-radius: 4px;
+    color: #dddddd;
+    line-height: 25px;
+}
+
+.luna-form .btn {
+    min-width: 100px;
+    background: transparent;
+    margin-top: 10px;
+    padding: 7px;
+    color: #DDD;
+    border: solid #DDD 1px;
+    border-radius: 4px;
+}
+
+.luna-form .btn:hover {
+    color: #FFF;
+    border-color: #FFF;
+}

@@ -1,12 +1,13 @@
 <div id="top" class="ui-panel">
-    <div class="top-ctrl">
+    <div class="left">
         <span ng-click="back()"
                 class="fa fa-chevron-left btn" aria-hidden="true"></span>
         <span ng-click="forward()"
                 class="fa fa-chevron-right btn" aria-hidden="true"></span>
+        <search-box></search-box>
     </div>
 
-    <search-box></search-box>
+
 
     <!--
     <div class="profile btn">
@@ -17,4 +18,7 @@
         <i class="fa fa-chevron-down" aria-hidden="true"></i>
     </div>
     -->
+    <div class="right">
+        <span class="btn fa fa-bars" ui-sref="settings"></span>
+    </div>
 </div>

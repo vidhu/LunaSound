@@ -6,7 +6,9 @@
     require('./app/services/audio/audio.module.js');
     require('./app/services/media/media.module.js');
     require('./app/services/youtube/youtube.module.js');
+    require('./app/services/lastfm/lastfm.module.js');
     require('./app/shared/mediaControl/mediaControl.module.js');
+    require('./app/components/settings/settings.component.js');
 
     //Configs
     const {routeConfig} = require('./app/app.route.js');
@@ -17,7 +19,10 @@
         'LunaSound.Audio',
         'LunaSound.Media',
         'LunaSound.Youtube',
+        'LunaSound.Lastfm',
+        'LunaSound.Settings',
         'ui.router',
+        'LocalStorageModule',
         'ngSanitize',
         'rzModule',
         'youtube-embed',
@@ -30,7 +35,12 @@
         .config(routeConfig)
         .constant('_', window._)
         .constant('$', window.$)
-        .run(function($rootScope, LibraryWatcher, PlaylistDB, editableOptions){
+        .config(function(localStorageServiceProvider){
+            localStorageServiceProvider
+                .setPrefix('LunaSound')
+                .setNotify(true, true);
+        })
+        .run(function($rootScope, LibraryWatcher, PlaylistDB, editableOptions, Lastfm){
             LibraryWatcher.start();
             PlaylistDB.watch();
 
@@ -41,6 +51,8 @@
             $rootScope.jq = window.$;
 
             editableOptions.theme = 'default';
+
+
         });
 
     //Modules - LunaSound NameSpace

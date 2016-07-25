@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="sub-header">
+    <span class="title">LastFm</span>
+</div>
+<div class="content">
+    <div ng-if="$ctrl.isConnected()">
+        You are connected to Last.fm as {{$ctrl.lastfmName()}}
+        <br/>
+        <button ng-click="$ctrl.logout()" class="btn">Disconnect</button>
+    </div>
+    <div ng-if="!$ctrl.isConnected()">
+        <form>
+            <input ng-model="$ctrl.username" type="text" placeholder="Username">
+            <input ng-model="$ctrl.password" type="password" placeholder="Password">
+            <button ng-click="$ctrl.login()" class="btn"><i class="fa fa-lastfm" aria-hidden="true"></i>&nbsp;Connect</button>
+        </form>
+        {{$ctrl.loginError}}
+    </div>
+</div>

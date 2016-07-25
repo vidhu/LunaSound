@@ -1,3 +1,7 @@
-/**
- * Created by vidhu on 7/24/2016.
- */
+(function(){
+    'use strict'
+
+    angular.module('LunaSound.Lastfm', []);
+
+    require('./lastfm.service.js');
+})();

@@ -11,20 +11,17 @@
     right: 0;
 }
 
-.top-ctrl {
+#top .left {
     display: flex;
-    flex: 0 0 auto;
+    flex: 1 1 auto;
+    align-items: center;
 }
 
-.top-ctrl > span{
+.left > span{
     margin: 0 10px 0 10px;
     cursor: pointer;
 }
 
-.search-box {
-    display: flex;
-    flex: 1 0 auto;
-}
 
 .search-box > i {
     color: #1B1B1B;
@@ -40,6 +37,17 @@
 
 .search-box .fa-times {
     color: #2F2F2F;
+}
+
+#top .right {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    align-items: flex-end;
+}
+
+#top .right >span {
+    margin: 0 10px 0 10px;
 }
 
 .profile {

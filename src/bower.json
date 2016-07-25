@@ -34,7 +34,9 @@
     "angular-sanitize": "^1.5.7",
     "ng-dialog": "^0.6.2",
     "angular-xeditable": "^0.2.0",
-    "angularjs-slider": "https://github.com/vidhu/angularjs-slider.git#2739813db0993108ab73bf93ac868690c3612ff0"
+    "angularjs-slider": "https://github.com/vidhu/angularjs-slider.git#2739813db0993108ab73bf93ac868690c3612ff0",
+    "js-md5": "md5#^0.4.1",
+    "angular-local-storage": "^0.2.7"
   },
   "overrides": {
     "angular": {

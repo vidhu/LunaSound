@@ -6,16 +6,18 @@
         var audio = null;
 
         var API = {
-            load: function(url){
+            load: function(track){
                 if(audio != null) {
                     audio.stop();
                     delete audio;
                 }
-                audio = ngAudio.load(url);
+                $rootScope.$broadcast('audio.load', track);
+                audio = ngAudio.load(track.URL);
             },
             play: function() {
-                if(audio)
+                if(audio) {
                     audio.play();
+                }
             },
             pause: function() {
                 if(audio)

@@ -19,6 +19,10 @@ module.exports = {
             .state('search', {
                 url: '/search/:q',
                 template: '<search></search>'
+            })
+            .state('settings', {
+                url: '/settings',
+                template: '<settings></settings>'
             });
     }
 };
