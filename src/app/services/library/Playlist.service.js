@@ -92,15 +92,15 @@ exports.PlaylistModel = function () {
         };
 
         this.cacheNeighbours = function (back, front) {
-            for(let i=this.idx; i<this.idx+front; i++){
-                if(i > this.songs.length)
+            for(let i=this.idx+1; i<this.idx+front; i++){
+                if(i >= this.songs.length)
                     break;
 
                 var track = this.songs[i];
                 console.log("caching -> " + i);
                 track.getStreamableUrl();
             }
-            for(let i=this.idx; i>this.idx-back; i--){
+            for(let i=this.idx-1; i>this.idx-back; i--){
                 if(i < 0)
                     break;
                 var track = this.songs[i];
