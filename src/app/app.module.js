@@ -65,7 +65,6 @@
     require('./app/components/track/track.component.js');
     require('./app/components/playlist/playlist.component.js');
     require('./app/components/search/search.component.js');
-    require('./app/components/explore/explore.track.component.js');
     require('./app/components/explore/explore.component.js');
 
 })();
