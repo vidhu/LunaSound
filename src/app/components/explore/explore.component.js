@@ -12,6 +12,9 @@
     function exploreController(Lastfm, PlaylistModel, Track) {
         var ctrl = this;
         ctrl.playlist = {};
+        ctrl.tracklistConfig = {
+            type: 'youtube'
+        };
 
         ctrl.$onInit = function () {
             getTopTracks();

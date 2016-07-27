@@ -18,7 +18,7 @@
             }
         });
 
-    function TracksController($scope, $stateParams, ngDialog, LibraryService, PlaylistModel, PlaylistService, PlaylistDB) {
+    function TracksController($scope, $stateParams, ngDialog, LibraryService, PlaylistModel, PlaylistService, PlaylistDB, MediaService) {
         var ctrl = this;
         ctrl.pageTitle = '';
 
@@ -26,7 +26,8 @@
             ctrl.config = ctrl.config || {};
             ctrl.config = {
                 enableSorting: ctrl.config.enableSorting || false,
-                enableEditing: ctrl.config.enableEditing || false
+                enableEditing: ctrl.config.enableEditing || false,
+                type: ctrl.config.type || 'local'
             };
             console.log(ctrl.config);
             makePlaylistMenu();
@@ -103,11 +104,20 @@
                     var playlist = PlaylistService.getCurrentPlaylist();
                     if (playlist)
                         playlist.queueSong(ctrl.playlist.songs[$itemScope.$index]);
-                }],
-                ['Add to Playlist', function ($itemScope) {
-                    // Code
-                }, ctrl.playlistMenu]
+                }]
             ];
+            if(ctrl.config.type == 'youtube'){
+                ctrl.menuOptions.push(['Download', function ($itemScope){
+                    $itemScope.track.getStreamableUrl()
+                        .then((url)=>{
+                            MediaService.addToQueue($itemScope.track.URL);
+                        });
+                }]);
+            }else{
+                ctrl.menuOptions.push(['Add to Playlist', function ($itemScope) {
+                    // Code
+                }, ctrl.playlistMenu]);
+            }
             if(ctrl.config.enableEditing){
                 ctrl.menuOptions = ctrl.menuOptions.concat([
                     ['Remove from Playlist', function ($itemScope) {
