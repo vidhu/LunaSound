@@ -5,10 +5,12 @@
 
         var audio = null;
         var _loadedTrack = null;
+        var loading = false;
 
         var API = {
             load: function(track){
                 _loadedTrack = track;
+                loading = true;
 
                 var p = track.getStreamableUrl()
                 .then((url)=>{
@@ -20,6 +22,7 @@
                             delete audio;
                         }
                         audio = ngAudio.load(url);
+                        loading = false;
                         $rootScope.$broadcast('audio.load', track);
                         $q.when(url);
                     }
@@ -45,6 +48,7 @@
                     audio.progress = pos;
             },
             stat: {
+                loading: loading,
                 paused: true,
                 progress: 0,
                 currentTime: 0,
@@ -57,6 +61,7 @@
             if(!audio)
                 return API.stat;
             return {
+                loading: loading,
                 paused: audio.paused,
                 progress: audio.progress,
                 currentTime: audio.currentTime,

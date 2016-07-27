@@ -3,11 +3,11 @@
         <span ng-click="$ctrl.musicPrev()"
                 class="img-btn media-prev">
         </span>
-
         <span ng-click="$ctrl.musicPlayPause()"
                    ng-class="{
-                    'media-play': $ctrl.sound.stat.paused,
-                    'media-pause': !$ctrl.sound.stat.paused
+                    'media-loading': $ctrl.sound.stat.loading,
+                    'media-play': $ctrl.sound.stat.paused  && !$ctrl.sound.stat.loading,
+                    'media-pause': !$ctrl.sound.stat.paused && !$ctrl.sound.stat.loading
                     }"
                     class="img-btn">
         </span>

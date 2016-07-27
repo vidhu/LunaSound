@@ -58,7 +58,7 @@
         this.repeat = function () {
             this.plopt.repeat = (this.plopt.repeat + 1) % 3;
             console.log(PlaylistService.playbackOptions.repeat);
-        }
+        };
     }
 
     function getSliderConfig(ctrl) {

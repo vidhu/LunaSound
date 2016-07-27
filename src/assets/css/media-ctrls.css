@@ -57,6 +57,29 @@
     height: 24px;
     margin: 0 10px 0 10px;
     cursor: pointer;
+    font-size: 25px;
+    color: #dcdada;
+    text-align: center;
+}
+
+.media-loading {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+
+    animation: spin 1.5s linear infinite;
+    transform-origin: 50% 50%;
+}
+
+.media-loading:before {
+    content: "\f021";
+}
+
+@keyframes spin {
+    0% { transform:rotate(0deg) }
+    100% { transform:rotate(359deg) }
 }
 
 .media-play {
