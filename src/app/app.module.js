@@ -52,7 +52,6 @@
 
             editableOptions.theme = 'default';
 
-
         });
 
     //Modules - LunaSound NameSpace
@@ -64,6 +63,9 @@
     require('./app/components/lunasound/lunasound.component.js');
     require('./app/components/addSong/addsong.component.js');
     require('./app/components/track/track.component.js');
+    require('./app/components/playlist/playlist.component.js');
     require('./app/components/search/search.component.js');
+    require('./app/components/explore/explore.track.component.js');
+    require('./app/components/explore/explore.component.js');
 
 })();

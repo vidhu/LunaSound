@@ -1,19 +1,34 @@
 (function () {
     'use strict'
 
+    /*
+    config:{
+        enableSorting: bool[false],
+        enableEditing: bool[false]
+    }
+     */
+
     angular.module('LunaSound')
         .component('tracksList', {
             templateUrl: 'app/components/track/track.template.html',
-            controller: TracksController
+            controller: TracksController,
+            bindings: {
+                playlist: '=',
+                config: '<'
+            }
         });
 
     function TracksController($scope, $stateParams, ngDialog, LibraryService, PlaylistModel, PlaylistService, PlaylistDB) {
         var ctrl = this;
         ctrl.pageTitle = '';
-        ctrl.playlist = null;
 
         ctrl.$onInit = function () {
-            setPlaylist();
+            ctrl.config = ctrl.config || {};
+            ctrl.config = {
+                enableSorting: ctrl.config.enableSorting || false,
+                enableEditing: ctrl.config.enableEditing || false
+            };
+            console.log(ctrl.config);
             makePlaylistMenu();
         };
 
@@ -57,26 +72,6 @@
                 currentPlaylist.indexChange(from, to);
         }
 
-        function setPlaylist() {
-            var playlistId = $stateParams.playlist;
-            console.log(playlistId);
-
-            if(playlistId == 0){
-                ctrl.playlist = new PlaylistModel(0, 'All songs', []);
-                ctrl.playlist.songs = LibraryService.getAllTracks();
-                ctrl.pageTitle = 'All Music';
-                PlaylistService.fillTracks(ctrl.playlist);
-            }else if(playlistId == 1){
-                ctrl.playlist = PlaylistService.getCurrentPlaylist();
-                ctrl.pageTitle = 'Now Playing';
-            }else{
-                PlaylistDB.getPlaylist(playlistId)
-                    .then((playlist)=> {
-                        ctrl.playlist = playlist;
-                        ctrl.pageTitle = playlist.name;
-                    });
-            }
-        }
 
         function savePlaylist() {
             PlaylistDB.save(ctrl.playlist);
@@ -111,21 +106,25 @@
                 }],
                 ['Add to Playlist', function ($itemScope) {
                     // Code
-                }, ctrl.playlistMenu],
-                ['Remove from Playlist', function ($itemScope) {
-                    removeTrack($itemScope.$index);
-                }, function ($itemScope) {
-                    return ctrl.getCurrentTrackIndex() != $itemScope.$index;
-                }],
-                ['Edit', function ($itemScope) {
-                    editTrack($itemScope.track);
-                }],
-                ['Delete', function ($itemScope) {
-                    deleteTrack($itemScope.track);
-                }, function ($itemScope) {
-                    return ctrl.getCurrentTrackIndex() != $itemScope.$index;
-                }]
+                }, ctrl.playlistMenu]
             ];
+            if(ctrl.config.enableEditing){
+                ctrl.menuOptions = ctrl.menuOptions.concat([
+                    ['Remove from Playlist', function ($itemScope) {
+                        removeTrack($itemScope.$index);
+                    }, function ($itemScope) {
+                        return ctrl.getCurrentTrackIndex() != $itemScope.$index;
+                    }],
+                    ['Edit', function ($itemScope) {
+                        editTrack($itemScope.track);
+                    }],
+                    ['Delete', function ($itemScope) {
+                        deleteTrack($itemScope.track);
+                    }, function ($itemScope) {
+                        return ctrl.getCurrentTrackIndex() != $itemScope.$index;
+                    }]
+                ]);
+            }
         }
 
         function removeTrack(index){
@@ -185,12 +184,6 @@
             });
 
         }
-
-        $scope.$on('Library:Change', function () {
-            // If tracks metadata change or any new
-            // tracks were added into the library
-            $scope.$apply(setPlaylist);
-        });
 
     }
 

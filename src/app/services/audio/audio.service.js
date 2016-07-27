@@ -1,18 +1,30 @@
 (function () {
 
     angular.module('LunaSound.Audio')
-    .factory('AudioService', function (ngAudio, $rootScope) {
+    .factory('AudioService', function (ngAudio, $q, $rootScope) {
 
         var audio = null;
 
         var API = {
             load: function(track){
+                var deferred = $q.defer();
+
                 if(audio != null) {
                     audio.stop();
                     delete audio;
                 }
-                $rootScope.$broadcast('audio.load', track);
-                audio = ngAudio.load(track.URL);
+
+                track.getStreamableUrl()
+                .then((url)=>{
+                    audio = ngAudio.load(url);
+                    $rootScope.$broadcast('audio.load', track);
+                    deferred.resolve(url);
+                }).catch((err)=>{
+                    deferred.reject(err);
+                    throw 'Error loading URL' + err;
+                });
+
+                return deferred.promise;
             },
             play: function() {
                 if(audio) {

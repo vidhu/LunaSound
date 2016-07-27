@@ -135,8 +135,10 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
         start: function () {
             let track = nowPlaying.getCurrentSong();
 
-            AudioService.load(track);
-            AudioService.play();
+            AudioService.load(track)
+            .then((url)=>{
+                AudioService.play();
+            });
         },
         playNext: function () {
             console.log("Playing Next");
@@ -144,16 +146,20 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
             if (!track)
                 return;
 
-            AudioService.load(track);
-            AudioService.play();
+            AudioService.load(track)
+            .then((url)=>{
+                AudioService.play();
+            });
         },
         playPrevious: function () {
             let track = nowPlaying.getPrevSong();
             if (!track)
                 return;
 
-            AudioService.load(track);
-            AudioService.play();
+            AudioService.load(track)
+            .then((url)=>{
+                AudioService.play();
+            });
         },
         playSongByIndex: function (idx) {
             nowPlaying.setCurrentSongIndex(idx);

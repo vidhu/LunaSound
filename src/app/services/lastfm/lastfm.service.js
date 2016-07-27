@@ -24,8 +24,8 @@
 
                     makeRequest(params)
                         .then(function (response) {
-                            API.Auth.setSession(response.data.session);
-                            deferred.resolve(response.data.session);
+                            API.Auth.setSession(response.session);
+                            deferred.resolve(response.session);
                         }, function (response) {
                             deferred.reject(response);
                         });
@@ -66,18 +66,38 @@
 
                     return deferred.promise;
                 }
+            },
+            Chart: {
+                getTopArtists: function () {
+                    var params = makeParams('chart.getTopTracks');
+                    return makeRequest(params);
+                },
+                getTopTags: function () {
+                    var params = makeParams('chart.getTopTags');
+                    return makeRequest(params);
+                },
+                getTopTracks: function () {
+                    var params = makeParams('chart.getTopTracks');
+                    return makeRequest(params);
+                }
             }
+
         };
 
+        function makeParams(method, params) {
+            if(typeof params != 'object')
+                params = {};
+            params.method = method;
+            params.api_key = API_KEY;
+            return params;
+        }
+
         function signParams(method, params, authenticated) {
+            makeParams(method, params);
             if (authenticated) {
                 params.sk = API.Auth.getSession().key;
             }
-            params.method = method;
-            params.api_key = API_KEY;
             var keys = Object.keys(params).sort();
-
-            console.log(keys);
 
             var api_sig = '';
             keys.forEach((key)=> {
@@ -102,7 +122,7 @@
             }).then((response)=> {
                 if (response.status != 200 || response.statusText != 'OK')
                     deferred.reject(response);
-                deferred.resolve(response);
+                deferred.resolve(response.data);
             }, (response)=> {
                 deferred.reject(response);
             });
@@ -110,9 +130,9 @@
             return deferred.promise;
         }
 
-        $rootScope.$on('audio.load', function(event, track){
-            if(API.Auth.isAuth()){
-               API.Track.scrobble(track.tag.title, track.tag.artist[0]);
+        $rootScope.$on('audio.load', function (event, track) {
+            if (API.Auth.isAuth()) {
+                API.Track.scrobble(track.tag.title, track.tag.artist[0]);
             }
         });
 

@@ -6,7 +6,7 @@ module.exports = {
         $stateProvider
             .state('explore', {
                 url: '/explore',
-                template: "<h1>explore!!</h1>"
+                template: "<explore></explore>"
             })
             .state('add-song', {
                 url: '/add-song',
@@ -14,7 +14,7 @@ module.exports = {
             })
             .state('tracks', {
                 url: '/tracks/:playlist',
-                template: '<tracks-list></tracks-list>'
+                template: '<playlist></playlist>'
             })
             .state('search', {
                 url: '/search/:q',
@@ -23,6 +23,6 @@ module.exports = {
             .state('settings', {
                 url: '/settings',
                 template: '<settings></settings>'
-            });
+            })
     }
 };
