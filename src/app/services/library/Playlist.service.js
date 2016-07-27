@@ -58,6 +58,8 @@ exports.PlaylistModel = function () {
                 }
             }
 
+            this.cacheNeighbours(5, 5);
+
             return this.songs[this.idx];
         };
 
@@ -87,6 +89,24 @@ exports.PlaylistModel = function () {
             var clone = new PlayListModel(this.id, this.name, []);
             clone.songs = this.songs.slice();
             return clone;
+        };
+
+        this.cacheNeighbours = function (back, front) {
+            for(let i=this.idx; i<this.idx+front; i++){
+                if(i > this.songs.length)
+                    break;
+
+                var track = this.songs[i];
+                console.log("caching -> " + i);
+                track.getStreamableUrl();
+            }
+            for(let i=this.idx; i>this.idx-back; i--){
+                if(i < 0)
+                    break;
+                var track = this.songs[i];
+                console.log("caching -> " + i);
+                track.getStreamableUrl();
+            }
         }
     }
 

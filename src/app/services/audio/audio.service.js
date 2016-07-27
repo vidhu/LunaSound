@@ -4,27 +4,32 @@
     .factory('AudioService', function (ngAudio, $q, $rootScope) {
 
         var audio = null;
+        var _loadedTrack = null;
 
         var API = {
             load: function(track){
-                var deferred = $q.defer();
+                _loadedTrack = track;
 
-                if(audio != null) {
-                    audio.stop();
-                    delete audio;
-                }
-
-                track.getStreamableUrl()
+                var p = track.getStreamableUrl()
                 .then((url)=>{
-                    audio = ngAudio.load(url);
-                    $rootScope.$broadcast('audio.load', track);
-                    deferred.resolve(url);
+                    if(track != _loadedTrack){
+                        $q.reject("Tracks don't match. Probably changed");
+                    }else{
+                        if(audio != null) {
+                            audio.stop();
+                            delete audio;
+                        }
+                        audio = ngAudio.load(url);
+                        $rootScope.$broadcast('audio.load', track);
+                        $q.when(url);
+                    }
                 }).catch((err)=>{
-                    deferred.reject(err);
+                    //deferred.reject(err);
                     throw 'Error loading URL' + err;
                 });
+                console.log(p);
+                return p;
 
-                return deferred.promise;
             },
             play: function() {
                 if(audio) {

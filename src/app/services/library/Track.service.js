@@ -4,6 +4,10 @@ module.exports = function TrackModel($q, $http) {
 
     function Track(data) {
         this.URL = data.URL;
+
+        this.streamableURL = null;
+        this.streamableExpiry = null;
+
         this.tag = data.tag;
 
         this.getId = function () {
@@ -18,10 +22,23 @@ module.exports = function TrackModel($q, $http) {
         this.getStreamableUrl = function () {
             var deferred = $q.defer();
 
-            var re = new RegExp("^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+");
-            if (re.test(this.URL)) {
-                //It's a youtube url
-                return getYoutubeStreamable(this.URL);
+
+            if (this.getType() == 'youtube') {
+                //If streamable URL is available and not expired, resolve to that
+                if(this.streamableURL && this.streamableExpiry > Math.floor(Date.now()/1000)) {
+                    console.log("Found streamable Url");
+                    deferred.resolve(this.streamableURL);
+                }else{
+                    console.log("Looking up new streamable URL");
+                    getYoutubeStreamable(this.URL)
+                    .then((url)=>{
+                        this.streamableURL = url;
+                        this.streamableExpiry = getParameterByName(url, 'expire');
+                        if(!this.streamableExpiry)
+                            this.streamableExpiry = Math.floor(Date.now()/1000) + 7200 //2hrs expiry
+                        deferred.resolve(this.streamableURL);
+                    });
+                }
             } else if(this.URL == '') {
                 //Attempt to find youtube URL
                 $http.get('https://www.listenvideo.com/search-audio/'+ this.tag.title + '/' + this.tag.artist[0])
@@ -37,6 +54,16 @@ module.exports = function TrackModel($q, $http) {
             }
 
             return deferred.promise;
+        };
+
+        this.getType = function(){
+            //type: {local, youtube}
+            var re = new RegExp("^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+");
+            if(re.test(this.URL)){
+                return 'youtube';
+            }else{
+                return 'local';
+            }
         };
 
         function getYoutubeStreamable(url){
@@ -55,6 +82,15 @@ module.exports = function TrackModel($q, $http) {
         }
     }
 
+    function getParameterByName(url, name) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
 
     return Track;
 };

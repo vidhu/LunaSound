@@ -7,7 +7,7 @@
             controller: playlistController
         });
 
-    function playlistController($stateParams, $scope, PlaylistModel, PlaylistDB, LibraryService){
+    function playlistController($stateParams, $scope, PlaylistService, PlaylistModel, PlaylistDB, LibraryService){
         var ctrl = this;
         ctrl.pageTitle;
         ctrl.playlist;
