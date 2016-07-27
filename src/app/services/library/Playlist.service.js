@@ -27,6 +27,7 @@ exports.PlaylistModel = function () {
 
         this.setCurrentSongIndex = function (idx) {
             this.idx = idx;
+            this.cacheNeighbours(5, 5);
         };
 
         this.getNextSong = function (step) {
