@@ -62,7 +62,7 @@ Packaging the application for distribution
 ##Contribution
 This project is still at its infancy and without any clear roadmap. Therefore,
 I will not be accepting any major changes to the application. Things like bug fixes
-will definitly be comfigured.
+will definitly be considered.
 
 In addition, please use the GitHub bug tracker to report any bugs
 
