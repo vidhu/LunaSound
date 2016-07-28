@@ -1,0 +1,11 @@
+<h1>Top Artists</h1>
+<div class="explore-top">
+    <div ng-repeat="artist in $ctrl.topArtists"
+         ui-sref="artist({id:1})"
+         class="thumbnail">
+        <div class="image">
+            <img class="image" src="{{artist.image[3]['#text']}}"/>
+        </div>
+        <div class="name">{{artist.name}}</div>
+    </div>
+</div>

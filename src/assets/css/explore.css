@@ -1,0 +1,44 @@
+.explore-top {
+
+}
+
+.explore-top .thumbnail {
+    display: inline-block;
+    position: relative;
+    margin: 20px 20px 20px 0;
+    background-color: #282828;
+    cursor: pointer;
+
+}
+
+.explore-top .thumbnail:hover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.explore-top .thumbnail:last-child {
+    margin-right: 0;
+}
+
+.explore-top .image {
+    display: block;
+    width: 200px;
+    height: 200px;
+}
+
+
+
+.explore-top .name {
+    padding: 15px 10px;
+}
+
+.explore-top .name:hover {
+    text-decoration: underline;
+}

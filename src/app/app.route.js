@@ -8,6 +8,10 @@ module.exports = {
                 url: '/explore',
                 template: "<explore-summary></explore-summary>"
             })
+            .state('artist', {
+                url: '/artist/:id',
+                template: "<explore-artist></explore-artist>"
+            })
             .state('trending', {
                 url: '/trending',
                 template: "<trending></trending>"

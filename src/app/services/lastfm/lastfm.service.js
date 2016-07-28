@@ -69,7 +69,7 @@
             },
             Chart: {
                 getTopArtists: function () {
-                    var params = makeParams('chart.getTopTracks');
+                    var params = makeParams('chart.getTopArtists');
                     return makeRequest(params);
                 },
                 getTopTags: function () {
