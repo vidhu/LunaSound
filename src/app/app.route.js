@@ -6,7 +6,11 @@ module.exports = {
         $stateProvider
             .state('explore', {
                 url: '/explore',
-                template: "<explore></explore>"
+                template: "<explore-summary></explore-summary>"
+            })
+            .state('trending', {
+                url: '/trending',
+                template: "<trending></trending>"
             })
             .state('add-song', {
                 url: '/add-song',

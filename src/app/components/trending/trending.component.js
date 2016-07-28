@@ -4,12 +4,12 @@
     const path = require('path');
 
     angular.module('LunaSound')
-        .component('explore', {
-            templateUrl: 'app/components/explore/explore.template.html',
-            controller: exploreController
+        .component('trending', {
+            templateUrl: 'app/components/trending/trending.template.html',
+            controller: trendingController
         });
 
-    function exploreController(Lastfm, PlaylistModel, Track) {
+    function trendingController(Lastfm, PlaylistModel, Track) {
         var ctrl = this;
         ctrl.playlist = {};
         ctrl.tracklistConfig = {

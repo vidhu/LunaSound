@@ -9,11 +9,13 @@
     require('./app/services/lastfm/lastfm.module.js');
     require('./app/shared/mediaControl/mediaControl.module.js');
     require('./app/components/settings/settings.component.js');
+    require('./app/components/explore/explore.module.js');
 
     //Configs
     const {routeConfig} = require('./app/app.route.js');
 
     angular.module('LunaSound', [
+        'LunaSound.Explore',
         'LunaSound.Library',
         'LunaSound.Mediacontrol',
         'LunaSound.Audio',
@@ -65,6 +67,6 @@
     require('./app/components/track/track.component.js');
     require('./app/components/playlist/playlist.component.js');
     require('./app/components/search/search.component.js');
-    require('./app/components/explore/explore.component.js');
+    require('./app/components/trending/trending.component.js');
 
 })();
