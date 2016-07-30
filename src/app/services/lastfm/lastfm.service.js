@@ -45,6 +45,87 @@
                     localStorageService.set('lastfm.session', session);
                 }
             },
+            Artist: {
+                getDetails: function(name){
+                    var deferred = $q.defer();
+
+                    $http({
+                        url: 'https://listenvideo.com/get-artist?top-tracks=true',
+                        method: "POST",
+                        data: $.param({name: name}),
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    }).then((response)=> {
+                        if (response.status != 200)
+                            deferred.reject(response);
+                        deferred.resolve(response.data);
+                    }, (response)=> {
+                        deferred.reject(response);
+                    });
+
+                    return deferred.promise;
+                },
+                getInfo: function(id) {
+                    var params = {autocorrect: 1};
+
+                    var re = new RegExp("([a-fA-F0-9]{8}(-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12})");
+                    if(re.test(id)){
+                        //It's a MBID
+                        params.mbid = id;
+                    }else{
+                        //It's an Artist's name
+                        params.artist = id;
+                    }
+                    params = makeParams('artist.getInfo', params);
+
+                    return makeRequest(params);
+                },
+                getTopTracks: function(id){
+                    var params = {autocorrect: 1};
+                    var re = new RegExp("([a-fA-F0-9]{8}(-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12})");
+                    if(re.test(id)){
+                        //It's a MBID
+                        params.mbid = id;
+                    }else{
+                        //It's an Artist's name
+                        params.artist = id;
+                    }
+                    params = makeParams('artist.getTopTracks', params);
+
+                    return makeRequest(params);
+                },
+                getTopAlbums: function(id){
+                    var params = {autocorrect: 1};
+                    var re = new RegExp("([a-fA-F0-9]{8}(-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12})");
+                    if(re.test(id)){
+                        //It's a MBID
+                        params.mbid = id;
+                    }else{
+                        //It's an Artist's name
+                        params.artist = id;
+                    }
+                    params = makeParams('artist.getTopAlbums', params);
+
+                    return makeRequest(params);
+                },
+                search: function(name, limit){
+                    var params = {
+                        artist: name,
+                        limit: limit
+                    };
+                    params = makeParams('artist.search', params);
+                    return makeRequest(params);
+                }
+            },
+                Album: {
+                search: function(name, limit){
+                    var params = {
+                        artist: name,
+                        limit: limit
+                    };
+                    params = makeParams('album.search', params);
+                    return makeRequest(params);
+                }
+            },
             Track: {
                 scrobble: function (title, artist) {
                     var deferred = $q.defer();

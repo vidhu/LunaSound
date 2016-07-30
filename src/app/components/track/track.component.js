@@ -27,9 +27,9 @@
             ctrl.config = {
                 enableSorting: ctrl.config.enableSorting || false,
                 enableEditing: ctrl.config.enableEditing || false,
-                type: ctrl.config.type || 'local'
+                type: ctrl.config.type || 'local',
+                hideHeader: ctrl.config.hideHeader || false
             };
-            console.log(ctrl.config);
             makePlaylistMenu();
         };
 
@@ -46,12 +46,6 @@
         };
 
         ctrl.uiSortableOptions = {
-            helper: function (e, ui) {
-                ui.children().each(function () {
-                    $(this).width($(this).width());
-                });
-                return ui;
-            },
             start: function (e, ui) {
                 ui.item.css('box-shadow', '0px 0px 16px #80ccff');
             },

@@ -1,1 +1,57 @@
-<h1>Artist!</h1>
+<div class="explore-artist">
+    <div class="banner">
+        <div class="profile">
+            <img src="{{$ctrl.artist.image[4]['#text']}}" width="150px"/>
+        </div>
+        <div class="name">
+            {{ $ctrl.artist.name }}
+        </div>
+        <div class="tags">
+            <span ng-repeat="tag in $ctrl.artist.tags.tag">
+                {{tag.name}}
+            </span>
+        </div>
+        <span class="btn-play" ng-click="$ctrl.playTop()">
+            <span ng-if="!$ctrl.isTopPlaylistPlaying()">
+                <i class="fa fa-play" aria-hidden="true"></i>PLAY
+            </span>
+            <span ng-if="$ctrl.isTopPlaylistPlaying()">
+                <i class="fa fa-pause" aria-hidden="true"></i>PAUSE
+            </span>
+        </span>
+    </div>
+    <div class="content">
+        <div class="popular-songs">
+            <span class="section-title">POPULAR SONGS</span>
+
+            <tracks-list playlist="$ctrl.playlists.top" config="{hideHeader: true, enableSorting: false, type: 'youtube'}"></tracks-list>
+        </div>
+        <div class="similar-artists">
+            <span class="section-title">SIMILAR ARTISTS</span>
+            <div class="item"
+                 ui-sref="artist({id:artist.name})"
+                 ng-repeat="artist in $ctrl.artist.similar.artist">
+                <img src="{{artist.image[2]['#text']}}" height="40px">
+                <span>{{ artist.name }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="albums">
+            <span class="section-title">Albums</span>
+            <hr/>
+            <div class="album" ng-repeat="album in $ctrl.playlists.albums">
+                <div class="info">
+                    <div class="art">
+                        <img src="{{album.tag.img}}" height="125px" width="125px"/>
+                    </div>
+                    <div class="detail">
+                        <span class="date">{{album.tag.date}}</span>
+                        <span class="name">{{album.name}}</span>
+                    </div>
+                </div>
+                <tracks-list playlist="album" config="{enableSorting: false, type: 'youtube'}"></tracks-list>
+            </div>
+        </div>
+    </div>
+</div>

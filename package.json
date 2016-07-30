@@ -1,6 +1,6 @@
 {
   "name": "luna-sound-dev-env",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "author": "vidhu",
   "dependencies": {
     "bower": "^1.7.9",

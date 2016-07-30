@@ -45,16 +45,9 @@ h1 {
     color: #00b3ee;
 }
 
-.track-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.track-table .playing {
-    color: #00b3ee;
-}
-
-.track-table th {
+.track-table .track-header {
+    display: flex;
+    flex-direction: row;
     text-align: left;
     color: #a2a2a2;
     font-weight: normal;
@@ -63,25 +56,47 @@ h1 {
     padding: 10px 0;
 }
 
-.track-table th:last-of-type {
+.track-table .track-title {
+    flex: 1 1 100%;
+}
+
+.track-table .track-album {
+    flex: 1 1 100%;
+}
+
+.track-table .track-artist {
+    flex: 1 1 100%;
+}
+
+.track-table .track-artist:hover {
+    text-decoration: underline;
+}
+
+.track-table .track-time {
+    flex: 0 0 50px;
     text-align: right;
 }
 
-.track-table tbody tr {
-    border-top: 1px solid #333;
+.track-table .track-items {
+
+}
+
+.track-table .track-items .track-item {
+    display: flex;
+    flex-direction: row;
     cursor: pointer;
-}
-
-.track-table tbody tr:hover {
-    background-color: #444;
-}
-
-.track-table td {
     padding: 10px 0;
+    border-bottom: 1px solid #333;
 }
 
-.track-table td:last-of-type {
-    text-align: right;
+.track-table .track-items .track-item > div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-table .playing {
+    color: #00b3ee;
 }
 
 .drag {

@@ -33,12 +33,143 @@
     height: 200px;
 }
 
-
-
 .explore-top .name {
     padding: 15px 10px;
 }
 
 .explore-top .name:hover {
     text-decoration: underline;
+}
+
+.explore-artist {
+
+}
+
+.explore-artist .banner {
+    height: 300px;
+    margin: -25px -25px 0 -25px;
+    background-image: url('../img/artist_bg.png');
+    background-position: center;
+    position: relative;
+}
+
+.explore-artist .banner .profile {
+    position: absolute;
+    bottom: 10px;
+    left: 25px;
+    width: 150px;
+    height: 150px;
+    background-color: black;
+    overflow: hidden;
+    border-radius: 75px;
+}
+
+.explore-artist .banner .name {
+    position: absolute;
+    bottom: 100px;
+    left: 200px;
+    font-size: 40px;
+}
+
+.explore-artist .banner .tags {
+    position: absolute;
+    bottom: 80px;
+    left: 200px;
+    letter-spacing: 1px;
+}
+.explore-artist .banner .tags span {
+    display: inline-block;
+    margin-right: 7px;
+}
+.explore-artist .banner .tags span::first-letter {
+     text-transform: capitalize;
+}
+
+.explore-artist .banner .btn-play {
+    position: absolute;
+    bottom: 25px;
+    left: 200px;
+    width: 125px;
+    line-height: 30px;
+    border-radius: 15px;
+    background-color: #0085ff;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    cursor: pointer;
+}
+
+.explore-artist .banner .btn-play:hover {
+    background-color: #3ba1ff;
+}
+
+.explore-artist .banner .btn-play i {
+    margin-right: 7px;
+}
+
+.explore-artist .content {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.explore-artist .content .section-title {
+    display: block;
+    color: #adafb2;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.explore-artist .content .popular-songs {
+    flex: 0 1 75%;
+    height: 300px;
+    overflow-y: scroll;
+    padding-right: 5px;
+}
+
+.explore-artist .content .similar-artists {
+    flex: 0 1 25%;
+    margin-left: 25px;
+}
+.explore-artist .content .similar-artists .item {
+    line-height: 30px;
+    vertical-align: middle;
+    background-color: #282828;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.explore-artist .content .similar-artists .item:hover {
+    background-color: #383838;
+}
+.explore-artist .content .similar-artists .item img {
+     vertical-align: middle;
+     border-radius: 25px;
+     margin: 5px;
+     margin-right: 10px;
+}
+
+.explore-artist .content .albums {
+    flex: 1 0 auto;
+}
+.explore-artist .content .album {
+    margin: 40px 0;
+}
+.explore-artist .content .album .info {
+    display: flex;
+    flex-direction: row;
+}
+.explore-artist .content .album .info .art {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+}
+.explore-artist .content .album .info .detail > span {
+    display: block;
+}
+.explore-artist .content .album .info .detail > .date {
+    font-size: 13px;
+    color: #adafb2;
+}
+.explore-artist .content .album .info .detail > .name {
+    font-size: 30px;
 }

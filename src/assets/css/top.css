@@ -50,24 +50,24 @@
     margin: 0 10px 0 10px;
 }
 
-.profile {
+#top .profile {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 0 10px;
 }
 
-.profile .profile-img {
+#top .profile .profile-img {
     margin: 0 10px;
     border-radius: 49%;
     overflow: hidden;
 }
 
-.profile span {
+#top .profile span {
     display: block;
 }
 
-.profile .fa {
+#top .profile .fa {
     display: block;
     margin: 0 10px;
 }

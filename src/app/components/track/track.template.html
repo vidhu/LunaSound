@@ -1,33 +1,31 @@
-<table class="track-table">
+<div class="track-table">
 
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Album</th>
-        <th>Artist</th>
-        <th><i class="fa fa-clock-o" aria-hidden="true"></i></th>
-    </tr>
+    <div class="track-header">
+        <div class="track-title">Title</div>
+        <div class="track-album">Album</div>
+        <div class="track-artist">Artist</div>
+        <div class="track-time"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+    </div>
 
-    </thead>
-    <tbody ui-sortable="$ctrl.uiSortableOptions"
-           ng-model="$ctrl.playlist.songs">
+    <div class="track-items"
+         ui-sortable="$ctrl.uiSortableOptions"
+         ng-model="$ctrl.playlist.songs">
 
-    <tr class="trackMenu"
-        context-menu="$ctrl.menuOptions"
-        ng-repeat="track in $ctrl.playlist.songs track by $index"
-        ng-dblclick="$ctrl.play($index)"
-        ng-class="$index == $ctrl.getCurrentTrackIndex() ? 'playing' : ''"
-    >
+        <div class="track-item"
+             context-menu="$ctrl.menuOptions"
+             ng-repeat="track in $ctrl.playlist.songs track by $index"
+             ng-dblclick="$ctrl.play($index)"
+             ng-class="$index == $ctrl.getCurrentTrackIndex() ? 'playing' : ''">
 
-        <td>{{ track.tag.title }}</td>
-        <td>{{ track.tag.album }}</td>
-        <td>{{ track.tag.artist[0] }}</td>
-        <td>{{ track.tag.duration | trackTime }}</td>
+            <div class="track-title">{{ track.tag.title }}</div>
+            <div class="track-album">{{ track.tag.album }}</div>
+            <div class="track-artist" ui-sref="artist({id:track.tag.artist[0]})">{{ track.tag.artist[0] }}</div>
+            <div class="track-time">{{ track.tag.duration | trackTime }}</div>
 
+        </div>
+    </div>
 
-    </tr>
-    </tbody>
-</table>
+</div>
 <script type="text/ng-template" id="edit_track.html">
     <div class="dialog-header">
         Edit Track

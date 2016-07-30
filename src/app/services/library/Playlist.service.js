@@ -10,6 +10,9 @@ exports.PlaylistModel = function () {
         //Variables
         this.id = id;
         this.name = name;
+        this.tag = {
+
+        };
         this.songs = songs;
         this.songsManual = [];
         this.songsShuffledIndex = [];

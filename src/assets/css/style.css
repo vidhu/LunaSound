@@ -17,6 +17,10 @@ html, body {
     /*font-family: 'Arimo', sans-serif;*/
 }
 
+hr {
+    border: solid #868686 01px;
+}
+
 #container {
 height: 100%;
 }
@@ -42,7 +46,7 @@ justify-content: center;
 
 /* Let's get this party started */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 /* Track */
