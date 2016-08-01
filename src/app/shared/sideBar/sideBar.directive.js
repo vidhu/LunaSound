@@ -8,7 +8,7 @@
             controller: topBar
         });
 
-    function topBar($scope, ngDialog, PlaylistModel, PlaylistService, PlaylistDB) {
+    function topBar($scope, ngDialog, PlaylistModel, PlaylistService, PlaylistDB, MediaService) {
         var ctrl = this;
         ctrl.name = "Cool Playlist";
         ctrl.playlists = [];
@@ -65,6 +65,10 @@
                 PlaylistDB.save(newPlaylist);
             });
 
+        };
+
+        ctrl.downloadQueueCount = function() {
+            return MediaService.getQueue().length;
         };
 
         function makePlaylistMenu() {

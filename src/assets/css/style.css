@@ -35,14 +35,6 @@ cursor: pointer;
 color: #eeeeee;
 }
 
-.add-music {
-display: flex;
-flex: 0 0 40px;
-flex-direction: row;
-align-items: center;
-justify-content: center;
-}
-
 
 /* Let's get this party started */
 ::-webkit-scrollbar {

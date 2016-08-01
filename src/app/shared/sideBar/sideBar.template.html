@@ -94,6 +94,11 @@
     </div>
 
     <div class="add-music ui-panel">
+        <a class="badge"
+           ui-sref="add-song"
+           ng-if="$ctrl.downloadQueueCount() != 0">
+            {{ $ctrl.downloadQueueCount() }}
+        </a>
         <span class="btn">
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
             <a ui-sref="add-song">Add Song</a>
