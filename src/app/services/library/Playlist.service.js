@@ -3,16 +3,15 @@ const path = require('path');
 const filendir = require('filendir');
 const glob = require("glob");
 const async = require('async');
-const gaze = require('gaze');
+const gaze = require('gaze'); //Need to replace with Chokidar
+const chokidar = require('chokidar');
 
 exports.PlaylistModel = function () {
     function PlayListModel(id, name, songs) {
         //Variables
         this.id = id;
         this.name = name;
-        this.tag = {
-
-        };
+        this.tag = {};
         this.songs = songs;
         this.songsManual = [];
         this.songsShuffledIndex = [];
@@ -41,13 +40,13 @@ exports.PlaylistModel = function () {
                 return this.songsManual.shift();
             }
 
-            if(this.playbackOptions.shuffle && this.playbackOptions.repeat != 2){
-                if(this.songsShuffledIndex.length == 0){
+            if (this.playbackOptions.shuffle && this.playbackOptions.repeat != 2) {
+                if (this.songsShuffledIndex.length == 0) {
                     this.songsShuffledIndex = _.range(this.songs.length);
                     this.songsShuffledIndex = _.shuffle(this.songsShuffledIndex);
                 }
                 this.idx = this.songsShuffledIndex.shift();
-            }else {
+            } else {
                 if (this.playbackOptions.repeat == 2) {
                     //Loop playback
                     //Don't change song index
@@ -96,16 +95,16 @@ exports.PlaylistModel = function () {
         };
 
         this.cacheNeighbours = function (back, front) {
-            for(let i=this.idx+1; i<this.idx+front; i++){
-                if(i >= this.songs.length)
+            for (let i = this.idx + 1; i < this.idx + front; i++) {
+                if (i >= this.songs.length)
                     break;
 
                 var track = this.songs[i];
                 console.log("caching -> " + i);
                 track.getStreamableUrl();
             }
-            for(let i=this.idx-1; i>this.idx-back; i--){
-                if(i < 0)
+            for (let i = this.idx - 1; i > this.idx - back; i--) {
+                if (i < 0)
                     break;
                 var track = this.songs[i];
                 console.log("caching -> " + i);
@@ -122,7 +121,7 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
     var nowPlaying = null;
 
     $rootScope.$on('Playlist:Change', (e, pl)=> {
-        if(nowPlaying && nowPlaying.name == pl.name){
+        if (nowPlaying && nowPlaying.name == pl.name) {
             nowPlaying.songs = pl.songs;
         }
     });
@@ -160,9 +159,9 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
             let track = nowPlaying.getCurrentSong();
 
             AudioService.load(track)
-            .then((url)=>{
-                AudioService.play();
-            });
+                .then((url)=> {
+                    AudioService.play();
+                });
         },
         playNext: function () {
             console.log("Playing Next");
@@ -171,9 +170,9 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
                 return;
 
             AudioService.load(track)
-            .then((url)=>{
-                AudioService.play();
-            });
+                .then((url)=> {
+                    AudioService.play();
+                });
         },
         playPrevious: function () {
             let track = nowPlaying.getPrevSong();
@@ -181,9 +180,9 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
                 return;
 
             AudioService.load(track)
-            .then((url)=>{
-                AudioService.play();
-            });
+                .then((url)=> {
+                    AudioService.play();
+                });
         },
         playSongByIndex: function (idx) {
             nowPlaying.setCurrentSongIndex(idx);
@@ -227,19 +226,20 @@ exports.PlaylistDB = function ($q, $rootScope, PlaylistModel, LibraryService) {
 
     var API = {
         watch: function () {
-            gaze('*.m3u', {cwd: PL_DIR}, function (err, watcher) {
+            var watcher = chokidar.watch('**/*.m3u', {
+                cwd: process.env.MUSIC_DIR,
+                ignored: /[\/\\]\./
+            });
 
-                this.on('all', function (event, filepath) {
-                    var playlistId = path.basename(filepath);
-                    if(event == 'deleted'){
-                        $rootScope.$broadcast('Playlist:Change', new PlaylistModel(playlistId, '', []));
-                    }else {
-                        API.getPlaylist(playlistId).then((pl)=> {
-                            $rootScope.$broadcast('Playlist:Change', pl);
-                        });
-                    }
-                });
-
+            watcher.on('all', (event, filename)=> {
+                var playlistId = path.basename(filename);
+                if(event == 'unlink'){
+                    $rootScope.$broadcast('Playlist:Change', new PlaylistModel(playlistId, '', []));
+                }else{
+                    API.getPlaylist(playlistId).then((pl)=> {
+                        $rootScope.$broadcast('Playlist:Change', pl);
+                    });
+                }
             });
         },
         save: function (playlist) {

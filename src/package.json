@@ -9,6 +9,7 @@
     "acoustid": "^1.2.1",
     "async": "^1.5.2",
     "browser-id3-writer": "^2.3.1",
+    "chokidar": "^1.6.0",
     "chromaprint": "^0.1.0",
     "devtron": "^1.2.1",
     "electron-connect": "^0.4.2",
