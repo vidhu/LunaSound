@@ -5,9 +5,7 @@ module.exports = function (LibraryService, Track) {
     const fs = require('fs');
     const mm = require('musicmetadata');
     const async = require('async');
-    const gaze = require('gaze');
     const chokidar = require('chokidar');
-
 
     var API = {};
 

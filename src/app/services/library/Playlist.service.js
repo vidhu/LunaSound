@@ -3,7 +3,6 @@ const path = require('path');
 const filendir = require('filendir');
 const glob = require("glob");
 const async = require('async');
-const gaze = require('gaze'); //Need to replace with Chokidar
 const chokidar = require('chokidar');
 
 exports.PlaylistModel = function () {
