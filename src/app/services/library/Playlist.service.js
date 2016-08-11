@@ -126,6 +126,7 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
     });
 
 
+
     var API = {
         playbackOptions: {
             shuffle: false,
@@ -138,16 +139,18 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
             playlist.songs = pl.songs;
             nowPlaying = playlist;
         },
+        unloadPlaylist: function () {
+            nowPlaying = null;
+        },
         setTracks: function (tracks) {
-            if (nowPlaying)
-                nowPlaying.songs = tracks.slice();
+            if(!nowPlaying) return;
+            nowPlaying.songs = tracks.slice();
         },
         getCurrentPlaylist: function () {
             return nowPlaying;
         },
         getCurrentSong: function () {
-            if (nowPlaying == null)
-                return null;
+            if(!nowPlaying) return;
             return nowPlaying.getCurrentSong();
         },
         setPlaybackOptions: function (plOpt) {
@@ -155,6 +158,8 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
             nowPlaying.playbackOptions = plOpt;
         },
         start: function () {
+            if (!nowPlaying) return;
+
             let track = nowPlaying.getCurrentSong();
 
             AudioService.load(track)
@@ -163,7 +168,8 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
                 });
         },
         playNext: function () {
-            console.log("Playing Next");
+            if(!nowPlaying) return;
+
             let track = nowPlaying.getNextSong();
             if (!track)
                 return;
@@ -174,6 +180,8 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
                 });
         },
         playPrevious: function () {
+            if(!nowPlaying) return;
+
             let track = nowPlaying.getPrevSong();
             if (!track)
                 return;
@@ -184,6 +192,8 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
                 });
         },
         playSongByIndex: function (idx) {
+            if(!nowPlaying) return;
+
             nowPlaying.setCurrentSongIndex(idx);
             API.start();
         },
@@ -209,7 +219,7 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
     return API;
 };
 
-exports.PlaylistDB = function ($q, $rootScope, PlaylistModel, LibraryService) {
+exports.PlaylistDB = function ($q, $rootScope, settings, PlaylistModel, LibraryService) {
     /**
      * Playlist(
      *  id: filepath
@@ -219,14 +229,32 @@ exports.PlaylistDB = function ($q, $rootScope, PlaylistModel, LibraryService) {
      *
      **/
 
-    var PL_DIR = path.join(process.env.MUSIC_DIR, 'playlist');
 
+
+    var PL_DIR = path.join(settings.getMusicDir(), 'playlist');
+    var watcher;
     var plCache = {};
 
     var API = {
         watch: function () {
-            var watcher = chokidar.watch('**/*.m3u', {
-                cwd: process.env.MUSIC_DIR,
+            //If directory was changed via settings, we need to update new PL_DIR
+            PL_DIR = path.join(settings.getMusicDir(), 'playlist');
+
+            //Create playlist dir if doesn't exists
+            if (!fs.existsSync(PL_DIR)){
+                fs.mkdirSync(PL_DIR);
+            }
+
+            //Stop perviour watcher if it exists
+            if(watcher)
+                watcher.close();
+
+
+            //Fire Playlist:Change event forefully if new dir doesn't contain any playlists
+            $rootScope.$broadcast('Playlist:Change', null);
+
+            watcher = chokidar.watch('**/*.m3u', {
+                cwd: PL_DIR,
                 ignored: /[\/\\]\./
             });
 

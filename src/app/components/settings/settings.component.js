@@ -14,4 +14,5 @@
     }
 
     require('./lastfm/lastfm.setting.component.js');
+    require('./musicdir/musicdir.setting.component.js');
 })();

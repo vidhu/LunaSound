@@ -10,13 +10,11 @@ by Electron to concieve a beautiful responsive music player.
   - Automatically download mp3 from youtube URLs
   - Auto Tagging support
 
-Planned Features
+Planned Features for next major update
 - [ ] Cross Platform Support (Windows, Linux, OSX)
-- [ ] Last.fm integration
-- [ ] Frontpage for Tracks
-- [ ] Sync Tracks and Playlists to the cloud
-- [ ] Mobile app
-- [ ] Web App
+- [x] Last.fm integration
+- [x] Frontpage for Tracks
+- [x] Artist's Pages and Tracks
 
 ##Technologies Used
 ###Application

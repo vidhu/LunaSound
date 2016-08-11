@@ -3,7 +3,7 @@
 }
 
 .luna-form .group {
-
+    margin-bottom: 50px;
 }
 
 .luna-form .group > .header {
@@ -54,4 +54,23 @@
 .luna-form .btn:hover {
     color: #FFF;
     border-color: #FFF;
+}
+
+.directory-selector {
+    display:inline-block;
+}
+
+.directory-selector label {
+    display: block;
+    cursor: pointer;
+    line-height: 36px;
+    text-align: center;
+    min-width: unset !important;
+    margin: 0 !important;
+    padding: 0 7px !important;
+}
+
+.directory-selector .hidden {
+    position: absolute;
+    left: -99999px;
 }

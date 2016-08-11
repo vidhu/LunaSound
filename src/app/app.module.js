@@ -57,11 +57,14 @@
         });
 
     //Modules - LunaSound NameSpace
+    require('./app/services/settings/settings.service.js');
     require('./app/shared/search/searchbox.component.js');
     require('./app/shared/topBar/topBar.directive.js');
     require('./app/shared/sideBar/sideBar.directive.js');
     require('./app/shared/chrome/chrome.directive.js');
     require('./app/shared/mediaControl/mediaControl.directive.js');
+    require('./app/shared/outsideClick/outsideclick.directive.js');
+    require('./app/shared/fileread/fileread.directive.js');
     require('./app/components/lunasound/lunasound.component.js');
     require('./app/components/addSong/addsong.component.js');
     require('./app/components/track/track.component.js');

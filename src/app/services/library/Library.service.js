@@ -4,33 +4,38 @@ const fs = require('fs');
 exports.LibraryService = function ($rootScope, $q) {
     var tracks = {};
 
-    function notifyLibraryChange(){
+    function notifyLibraryChange() {
         $rootScope.$broadcast('Library:Change');
     }
 
     var API = {
         addTrack: function (key, track, notifyChange) {
-            if(notifyChange == null) notifyChange = true;
+            if (notifyChange == null) notifyChange = true;
 
             tracks[key] = track;
 
-            if(notifyChange)
+            if (notifyChange)
                 notifyLibraryChange();
         },
 
         addTracks: function (tracks) {
-            _.each(tracks, (value, key)=>{
+            _.each(tracks, (value, key)=> {
                 API.addTrack(key, value, false);
             });
             notifyLibraryChange();
         },
 
-        removeTrack: function(track){
+        removeTrack: function (track) {
             delete tracks[track];
             notifyLibraryChange();
         },
 
-        deleteTrack: function(track){
+        removeAll: function () {
+            tracks = {};
+            notifyLibraryChange();
+        },
+
+        deleteTrack: function (track) {
             var completedDeferred = $q.defer();
 
             var trackId = track.getId();
@@ -52,7 +57,7 @@ exports.LibraryService = function ($rootScope, $q) {
             return null;
         },
 
-        getAllTracks: function() {
+        getAllTracks: function () {
             return Object.keys(tracks);
         }
     };

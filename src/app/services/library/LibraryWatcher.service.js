@@ -1,4 +1,4 @@
-module.exports = function (LibraryService, Track) {
+module.exports = function (settings, LibraryService, Track) {
 
     const path = require('path');
     const glob = require("glob");
@@ -7,11 +7,23 @@ module.exports = function (LibraryService, Track) {
     const async = require('async');
     const chokidar = require('chokidar');
 
+    var MUSIC_DIR = settings.getMusicDir();
+    var watcher;
+
     var API = {};
 
     API.start = function () {
+        //If directory was changed via settings, we need to update new MUSIC_DIR
+        MUSIC_DIR = settings.getMusicDir();
 
-        glob(path.join(process.env.MUSIC_DIR, '**/*.mp3'), function (er, files) {
+        //Stop perviour watcher if it exists
+        if(watcher)
+            watcher.close();
+
+        //Clear Library
+        LibraryService.removeAll();
+
+        glob(path.join(MUSIC_DIR, '**/*.mp3'), function (er, files) {
             var _tempLibrary = {};
             async.each(files, function (file, cb) {
 
@@ -33,14 +45,14 @@ module.exports = function (LibraryService, Track) {
         });
 
         //Watch for any changes
-        var watcher = chokidar.watch('*.mp3', {
-            cwd: process.env.MUSIC_DIR,
+        watcher = chokidar.watch('*.mp3', {
+            cwd: MUSIC_DIR,
             ignored: /[\/\\]\./,
             ignoreInitial: true,
         });
 
         watcher.on('all', (event, filepath)=> {
-            filepath = path.join(process.env.MUSIC_DIR, filepath);
+            filepath = path.join(MUSIC_DIR, filepath);
 
             //On file changed
             if (event == 'add' || event == 'change') {

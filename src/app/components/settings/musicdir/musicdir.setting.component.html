@@ -1,0 +1,18 @@
+<div class="sub-header">
+    <span class="title">Music Directory</span>
+</div>
+<div class="content">
+    Tracks and Playlists will be saved in the following directory on your system
+
+    <form>
+        <input type="text" style="display: inline-block" ng-model="$ctrl.directory">
+        <div class="directory-selector">
+            <label for="form-file" class="btn">Change</label>
+            <input fileread="$ctrl.directory" type="file" name="file" id="form-file" class="hidden" webkitdirectory director/>
+        </div>
+        <br/>
+        <button class="btn" ng-click="$ctrl.saveDir()">Save</button>
+    </form>
+
+
+</div>

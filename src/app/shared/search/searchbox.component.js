@@ -24,16 +24,15 @@
             }
         };
 
-        ctrl.searchBoxFocus = function() {
+        ctrl.searchBoxBlur = function(blur) {
             liSelected = null;
-            ctrl.hideSuggestion = false;
+            ctrl.hideSuggestion = blur;
         };
 
-        ctrl.searchBoxBlur = function() {
-            liSelected = null;
-            ctrl.hideSuggestion = true;
+        ctrl.suggestionClick = function(suggestion) {
+            ctrl.searchBoxBlur(true);
+            $state.go('search', {q: suggestion});
         };
-
 
         ctrl.key = function($event){
             ctrl.hideSuggestion = false;
