@@ -8,7 +8,7 @@
     function topBar() {
         return {
             restrict: 'E',
-            templateUrl: 'app/shared/topBar/topBar.template.html',
+            templateUrl: 'shared/topBar/topBar.template.html',
             controller: function ($scope) {
                 $scope.back = function () {
                     window.history.back();

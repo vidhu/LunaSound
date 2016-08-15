@@ -5,7 +5,7 @@
 
     angular.module('LunaSound')
         .component('trending', {
-            templateUrl: 'app/components/trending/trending.template.html',
+            templateUrl: 'components/trending/trending.template.html',
             controller: trendingController
         });
 

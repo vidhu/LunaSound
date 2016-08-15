@@ -3,7 +3,7 @@
 
     angular.module('LunaSound.Explore')
         .component('exploreSummary', {
-            templateUrl: 'app/components/explore/summary/summary.template.html',
+            templateUrl: 'components/explore/summary/summary.template.html',
             controller: exploreSummaryController
         });
 

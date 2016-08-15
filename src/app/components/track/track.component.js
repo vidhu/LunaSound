@@ -10,7 +10,7 @@
 
     angular.module('LunaSound')
         .component('tracksList', {
-            templateUrl: 'app/components/track/track.template.html',
+            templateUrl: 'components/track/track.template.html',
             controller: TracksController,
             bindings: {
                 playlist: '=',

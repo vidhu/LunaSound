@@ -4,7 +4,7 @@
 
     angular.module('LunaSound')
         .component('addSong', {
-            templateUrl: 'app/components/addSong/addsong.template.html',
+            templateUrl: 'components/addSong/addsong.template.html',
             controller: AddSongController
         });
 

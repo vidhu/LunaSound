@@ -2,7 +2,7 @@
 
     angular.module('LunaSound')
         .component('search', {
-            templateUrl: 'app/components/search/search.template.html',
+            templateUrl: 'components/search/search.template.html',
             controller: searchController
         });
 

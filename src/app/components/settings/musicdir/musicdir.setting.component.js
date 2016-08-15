@@ -3,7 +3,7 @@
 
     angular.module('LunaSound.Settings')
         .component('musicdirSettings', {
-            templateUrl: 'app/components/settings/musicdir/musicdir.setting.component.html',
+            templateUrl: 'components/settings/musicdir/musicdir.setting.component.html',
             controller: MusicdirSettingsController
         });
 

@@ -3,7 +3,7 @@
 
     angular.module('LunaSound')
         .component('playlist', {
-            templateUrl: 'app/components/playlist/playlist.template.html',
+            templateUrl: 'components/playlist/playlist.template.html',
             controller: playlistController
         });
 

@@ -11,8 +11,10 @@ process.env.MUSIC_DIR = path.join(__dirname, 'music');
 process.env.ffmpeg = path.join(__dirname, 'lib/ffmpeg/ffmpeg.exe');
 process.env.fpcalc = path.join(__dirname, '/lib/fpcalc/fpcalc.exe');
 
-
+let bootWindow = null;
 let mainWindow = null;
+
+
 
 app.on('ready', function () {
     let displays = electron.screen.getAllDisplays();
@@ -37,7 +39,7 @@ app.on('ready', function () {
         });
     }
 
-    mainWindow.loadURL('file://' + __dirname + '/index.compiled.html');
+    mainWindow.loadURL('file://' + __dirname + '/app/index.compiled.html');
 });
 
 

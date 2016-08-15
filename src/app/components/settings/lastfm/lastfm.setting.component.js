@@ -3,7 +3,7 @@
 
     angular.module('LunaSound.Settings')
         .component('lastfmSettings', {
-            templateUrl: 'app/components/settings/lastfm/lastfm.setting.template.html',
+            templateUrl: 'components/settings/lastfm/lastfm.setting.template.html',
             controller: LastfmSettingsController
         });
 

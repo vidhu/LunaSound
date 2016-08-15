@@ -6,7 +6,7 @@
         .directive('chrome', function(){
             return {
                 restrict: 'E',
-                templateUrl: './app/shared/chrome/chrome.directive.html',
+                templateUrl: './shared/chrome/chrome.directive.html',
                 controller: ChromeController,
                 controllerAs: 'vm',
                 bindToController: true

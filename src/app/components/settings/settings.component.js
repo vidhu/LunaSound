@@ -5,7 +5,7 @@
 
     angular.module('LunaSound.Settings', [])
         .component('settings', {
-            templateUrl: 'app/components/settings/settings.template.html',
+            templateUrl: 'components/settings/settings.template.html',
             controller: settingsController
         });
 

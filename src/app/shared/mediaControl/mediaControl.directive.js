@@ -4,7 +4,7 @@
     angular
         .module('LunaSound.Mediacontrol')
         .component('mediaControl', {
-            templateUrl: 'app/shared/mediaControl/mediaControl.template.html',
+            templateUrl: 'shared/mediaControl/mediaControl.template.html',
             controller: MediaControlController
         });
 

@@ -4,7 +4,7 @@
     angular
         .module('LunaSound')
         .component('sideBar', {
-            templateUrl: 'app/shared/sideBar/sideBar.template.html',
+            templateUrl: 'shared/sideBar/sideBar.template.html',
             controller: topBar
         });
 
@@ -96,7 +96,7 @@
 
         function showDeleteConfirmDialog(playlist) {
             ngDialog.openConfirm({
-                template: 'app/shared/sideBar/playlistDeleteConfirm.template.html',
+                template: 'shared/sideBar/playlistDeleteConfirm.template.html',
                 className: 'ngdialog-theme-luna',
                 controller: function($scope){
                     $scope.playlistName = playlist.name;

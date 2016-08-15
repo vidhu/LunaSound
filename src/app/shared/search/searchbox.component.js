@@ -2,7 +2,7 @@
 
     angular.module('LunaSound')
         .component('searchBox', {
-            templateUrl: 'app/shared/search/searchbox.template.html',
+            templateUrl: 'shared/search/searchbox.template.html',
             controller: searchboxController
         });
 

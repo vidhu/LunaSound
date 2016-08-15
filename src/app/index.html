@@ -5,10 +5,10 @@
     <title ng-bind="'LunaSound - URL: index.html' + title">LunaSound</title>
 
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="../bower_components/components-font-awesome/css/font-awesome.css"/>
     <!-- endbower -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <!-- endinject -->
 </head>
 <body>
@@ -18,7 +18,6 @@
     <top-bar></top-bar>
 
     <side-bar></side-bar>
-
     <div id="content">
         <div ui-view></div>
     </div>
@@ -28,13 +27,13 @@
 </div>
 
 </body>
-<script>window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.js');</script>
+<script>window.$ = window.jQuery = require('../bower_components/jquery/dist/jquery.js');</script>
 <script src="https://www.youtube.com/iframe_api"></script>
 <!-- build:remove -->
 <script>require('electron-connect').client.create()</script>
 <!-- end:build -->
-<script src="bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
 <!-- bower:js -->
 <!-- endbower -->
-<script src="app/app.module.js"></script>
+<script src="app.module.js"></script>
 </html>

@@ -46,16 +46,17 @@ function inject() {
 
     const injectOptions = {
         ignorePath: ['src/'],
-        addRootSlash: false
+        addRootSlash: false,
+        relative: true
     };
 
-    return gulp.src('src/index.html')
+    return gulp.src('src/app/index.html')
         .pipe(gulpInject(injectStyles, injectOptions))
         .pipe(wiredep({
             cwd: 'src/'
         }))
         .pipe(rename('index.compiled.html'))
-        .pipe(gulp.dest('src/'));
+        .pipe(gulp.dest('src/app/'));
 }
 
 //Watch for changes and reload
@@ -66,7 +67,7 @@ function watch(cb) {
         'src/electron/**/*.js'
     ], gulp.series(electronRestart));
 
-    gulp.watch('src/index.html', gulp.series('inject', electronReload));
+    gulp.watch('src/app/index.html', gulp.series('inject', electronReload));
     gulp.watch('src/app/**/*.html', electronReload);
     gulp.watch('src/bower.json', gulp.series('inject', electronReload));
     gulp.watch('src/assets/**/*.css', gulp.series('inject', electronReload));
