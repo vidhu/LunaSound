@@ -17,8 +17,7 @@ gulp.task('inject', inject);
 gulp.task('watch', watch);
 gulp.task('clean', clean);
 gulp.task('serve', gulp.series('inject', 'watch', electronServe));
-gulp.task('package', gulp.series('inject', 'clean', packageApp, makeIcon));
-gulp.task('installer', gulp.series('package', installer));
+gulp.task('package', gulp.series('inject', 'clean', packageApp, makeIcon, installer));
 
 
 function installer() {
