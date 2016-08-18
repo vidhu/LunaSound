@@ -121,9 +121,9 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
 
     $rootScope.$on('Playlist:Change', (e, pl)=> {
         if (nowPlaying && nowPlaying.name == pl.name) {
-            nowPlaying.songs = pl.songs;
-        }
-    });
+        nowPlaying.songs = pl.songs;
+    }
+});
 
 
 
@@ -164,8 +164,8 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
 
             AudioService.load(track)
                 .then((url)=> {
-                    AudioService.play();
-                });
+                AudioService.play();
+        });
         },
         playNext: function () {
             if(!nowPlaying) return;
@@ -176,8 +176,8 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
 
             AudioService.load(track)
                 .then((url)=> {
-                    AudioService.play();
-                });
+                AudioService.play();
+        });
         },
         playPrevious: function () {
             if(!nowPlaying) return;
@@ -188,8 +188,8 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
 
             AudioService.load(track)
                 .then((url)=> {
-                    AudioService.play();
-                });
+                AudioService.play();
+        });
         },
         playSongByIndex: function (idx) {
             if(!nowPlaying) return;
@@ -260,14 +260,14 @@ exports.PlaylistDB = function ($q, $rootScope, settings, PlaylistModel, LibraryS
 
             watcher.on('all', (event, filename)=> {
                 var playlistId = path.basename(filename);
-                if(event == 'unlink'){
-                    $rootScope.$broadcast('Playlist:Change', new PlaylistModel(playlistId, '', []));
-                }else{
-                    API.getPlaylist(playlistId).then((pl)=> {
-                        $rootScope.$broadcast('Playlist:Change', pl);
-                    });
-                }
+            if(event == 'unlink'){
+                $rootScope.$broadcast('Playlist:Change', new PlaylistModel(playlistId, '', []));
+            }else{
+                API.getPlaylist(playlistId).then((pl)=> {
+                    $rootScope.$broadcast('Playlist:Change', pl);
             });
+            }
+        });
         },
         save: function (playlist) {
             var completedDeferred = $q.defer();
@@ -313,9 +313,9 @@ exports.PlaylistDB = function ($q, $rootScope, settings, PlaylistModel, LibraryS
                     var playlistId = path.basename(file);
                     API.getPlaylist(playlistId)
                         .then((playlist)=> {
-                            playlists.push(playlist);
-                            cb();
-                        });
+                        playlists.push(playlist);
+                    cb();
+                });
 
                 }, function (er) {
                     if (er) throw er;

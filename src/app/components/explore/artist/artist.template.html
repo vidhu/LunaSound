@@ -29,7 +29,7 @@
         <div class="similar-artists">
             <span class="section-title">SIMILAR ARTISTS</span>
             <div class="item"
-                 ui-sref="artist({id:artist.name})"
+                 ui-sref="main.artist({id:artist.name})"
                  ng-repeat="artist in $ctrl.artist.similar.artist">
                 <img src="{{artist.image[2]['#text']}}" height="40px">
                 <span>{{ artist.name }}</span>

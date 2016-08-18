@@ -7,19 +7,19 @@
                     <li>
                         <span ui-sref-active="active" class="btn">
                                 <i class="fa fa-wifi" aria-hidden="true"></i>
-                                <a ui-sref="tracks({playlist:1})">Now Playing</a>
+                                <a ui-sref="main.tracks({playlist:1})">Now Playing</a>
                         </span>
                     </li>
                     <li>
                             <span ui-sref-active="active" class="btn">
                                 <i class="fa fa-th-list" aria-hidden="true"></i>
-                                <a ui-sref="explore">Explore</a>
+                                <a ui-sref="main.explore">Explore</a>
                             </span>
                     </li>
                     <li>
                             <span ui-sref-active="active">
                                 <i class="fa fa-line-chart" aria-hidden="true"></i>
-                                <a ui-sref="trending">Trending</a>
+                                <a ui-sref="main.trending">Trending</a>
                             </span>
                     </li>
                 </ul>
@@ -36,7 +36,7 @@
                     <li>
                                 <span ui-sref-active="active" class="btn">
                                     <i class="fa fa-server" aria-hidden="true"></i>
-                                    <a ui-sref="tracks({playlist:0})">All Music</a>
+                                    <a ui-sref="main.tracks({playlist:0})">All Music</a>
                                 </span>
                     </li>
                     <li>
@@ -72,7 +72,7 @@
                                 aria-hidden="true">
                             </i>
 
-                            <a ui-sref="tracks({playlist:playlist.id})"
+                            <a ui-sref="main.tracks({playlist:playlist.id})"
                                buttons="no"
                                editable-text="playlist.name"
                                onbeforesave="$ctrl.renamePlaylist(playlist, $data)"
@@ -95,13 +95,13 @@
 
     <div class="add-music ui-panel">
         <a class="badge"
-           ui-sref="add-song"
+           ui-sref="main.add-song"
            ng-if="$ctrl.downloadQueueCount() != 0">
             {{ $ctrl.downloadQueueCount() }}
         </a>
         <span class="btn">
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
-            <a ui-sref="add-song">Add Song</a>
+            <a ui-sref="main.add-song">Add Song</a>
         </span>
     </div>
 </div>

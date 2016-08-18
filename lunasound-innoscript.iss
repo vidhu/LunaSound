@@ -23,8 +23,8 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=C:\Users\vidhu\Desktop
-OutputBaseFilename=lunasound-{#version}setup
+OutputDir=release
+OutputBaseFilename=lunasound-{#version}-setup
 Compression=lzma
 SolidCompression=yes
 

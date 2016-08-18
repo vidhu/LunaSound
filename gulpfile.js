@@ -1,32 +1,58 @@
 const gulp = require('gulp');
+const fs = require('fs');
 const del = require('del');
 const eslint = require('gulp-eslint');
 const wiredep = require('wiredep').stream;
 const gulpInject = require('gulp-inject');
 const rename = require("gulp-rename");
+const inno = require('gulp-inno');
 const electronConnect = require('electron-connect').server.create({path:'src'});
 const electron = require('gulp-electron');
+const rcedit = require('rcedit');
+const packageJson = JSON.parse(fs.readFileSync('./src/package.json'));
+
 
 gulp.task('scripts', scripts);
 gulp.task('inject', inject);
 gulp.task('watch', watch);
 gulp.task('clean', clean);
 gulp.task('serve', gulp.series('inject', 'watch', electronServe));
-gulp.task('package', gulp.series('inject', 'clean', packageApp));
+gulp.task('package', gulp.series('inject', 'clean', packageApp, makeIcon));
+gulp.task('installer', gulp.series('package', installer));
 
 
+function installer() {
+    return gulp.src('./lunasound-innoscript.iss')
+        .pipe(inno({
+            args:[`/Dversion=${packageJson.version}`]
+        }));
+}
 
 function packageApp() {
     return gulp.src('./src/**/*')
         .pipe(electron({
             src: './src',
-            packageJson: require('./src/package.json'),
+            packageJson: packageJson,
             release: './release',
             cache: './cache',
             version: 'v1.2.6',
+            packaging: false,
             platforms: ['win32-ia32']
         }))
-        .pipe(gulp.dest('./release'));
+        .pipe(gulp.dest(''));
+}
+
+function makeIcon(cb) {
+    rcedit('./release/v1.2.6/win32-ia32/lunasound.exe', {
+        "version-string": packageJson.version,
+        "file-version": packageJson.version,
+        "product-version": packageJson.version,
+        "icon": './src/assets/img/icon.ico'
+    }, function(er){
+        if(er) console.log(er);
+        else console.log("modified exe");
+        cb();
+    });
 }
 
 function scripts() {
@@ -42,7 +68,7 @@ function inject() {
         'src/assets/css/normalize.css',
         'src/assets/css/topcoat/topcoat-desktop-light.css',
         'src/assets/**/*.css'
-        ], {read: false});
+    ], {read: false});
 
     const injectOptions = {
         ignorePath: ['src/'],
@@ -64,7 +90,7 @@ function watch(cb) {
     gulp.watch([
         'src/lib/**',
         'src/main.electron.js',
-        'src/electron/**/*.js'
+        'src/core/**/*.js'
     ], gulp.series(electronRestart));
 
     gulp.watch('src/app/index.html', gulp.series('inject', electronReload));

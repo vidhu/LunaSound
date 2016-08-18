@@ -65,7 +65,6 @@
     require('./shared/mediaControl/mediaControl.directive.js');
     require('./shared/outsideClick/outsideclick.directive.js');
     require('./shared/fileread/fileread.directive.js');
-    require('./components/lunasound/lunasound.component.js');
     require('./components/addSong/addsong.component.js');
     require('./components/track/track.component.js');
     require('./components/playlist/playlist.component.js');

@@ -1,10 +1,14 @@
-/cache
+cache
 /node_modules
 /release
+/src/config.json
 /src/bower_components
 /src/node_modules
+/src/app/index.compiled.html
 *.mp3
 *.m3u
 .idea
 .idea/
 .DS_Store
+src/app/index.compiled.html
+src/music/

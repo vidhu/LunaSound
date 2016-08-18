@@ -1,0 +1,18 @@
+#boot {
+    padding: 50px 25px;
+
+    position: absolute;
+
+    top: 25px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: #1d1d1d;
+
+    padding: 25px;
+
+    color: #f9f9f9;
+
+    overflow-y: scroll;
+}

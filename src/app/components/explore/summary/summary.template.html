@@ -1,7 +1,7 @@
 <h1>Top Artists</h1>
 <div class="explore-top">
     <div ng-repeat="artist in $ctrl.topArtists"
-         ui-sref="artist({id:artist.name})"
+         ui-sref="main.artist({id:artist.name})"
          class="thumbnail">
         <div class="image">
             <img class="image" src="{{artist.image[3]['#text']}}"/>

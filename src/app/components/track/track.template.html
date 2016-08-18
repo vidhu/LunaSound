@@ -19,7 +19,7 @@
 
             <div class="track-title">{{ track.tag.title }}</div>
             <div class="track-album">{{ track.tag.album }}</div>
-            <div class="track-artist" ui-sref="artist({id:track.tag.artist[0]})">{{ track.tag.artist[0] }}</div>
+            <div class="track-artist" ui-sref="main.artist({id:track.tag.artist[0]})">{{ track.tag.artist[0] }}</div>
             <div class="track-time">{{ track.tag.duration | trackTime }}</div>
 
         </div>
