@@ -17,7 +17,8 @@ gulp.task('inject', inject);
 gulp.task('watch', watch);
 gulp.task('clean', clean);
 gulp.task('serve', gulp.series('inject', 'watch', electronServe));
-gulp.task('package', gulp.series('inject', 'clean', packageApp, makeIcon, installer));
+gulp.task('build', gulp.series('inject', 'clean', build, makeIcon));
+gulp.task('package', gulp.series('build', installer));
 
 
 function installer() {
@@ -27,8 +28,8 @@ function installer() {
         }));
 }
 
-function packageApp() {
-    return gulp.src('./src/**/*')
+function build() {
+    return gulp.src("./src")
         .pipe(electron({
             src: './src',
             packageJson: packageJson,

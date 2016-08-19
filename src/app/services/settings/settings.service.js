@@ -1,46 +1,32 @@
 (function(){
     'use strict'
     const path = require('path');
-    const nconf = require('nconf');
+    const config = require(path.join(process.env.BASE_DIR, 'core/config.js'));
 
     angular.module('LunaSound.Settings')
         .factory('settings', settingsService);
 
     function settingsService(){
-        let configPath = path.join(process.env.BASE_DIR, 'config.json');
 
-        nconf.argv()
-            .env()
-            .file({ file: configPath });
 
         var API = {
             getSettings: function(){
-                return nconf.get();
+                return config.getSettings();
             },
             getSetting: function(key){
-                return nconf.get(key);
+                return config.getSetting(key);
             },
             saveSettings: function(){
-                nconf.save(function (err) {
-                    fs.readFile(configPath, function (err, data) {
-                        console.dir(JSON.parse(data.toString()))
-                    });
-                });
+                config.saveSettings();
             },
             saveSetting: function(path, setting){
-                nconf.set(path, setting);
-
-                API.saveSettings();
+                config.saveSetting(path, setting);
             },
             getMusicDir: function(){
-                var musicDir = API.getSetting('dir:music');
-                if(musicDir == null || musicDir == '')
-                    musicDir = process.env.MUSIC_DIR;
-                API.saveMusicDir(musicDir);
-                return musicDir;
+                return config.getMusicDir();
             },
             saveMusicDir: function(dir){
-                API.saveSetting('dir:music', dir);
+                config.saveMusicDir();
             }
         };
 
