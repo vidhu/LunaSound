@@ -10,6 +10,7 @@ const {ipcRenderer} = require('electron');
             var _loadedTrack = null;
             var loading = false;
 
+
             var API = {
                 load: function (track) {
                     _loadedTrack = track;
@@ -47,9 +48,17 @@ const {ipcRenderer} = require('electron');
                         audio.pause();
 
                 },
+                stop: function () {
+                    API.pause();
+                    //API.seek(0.5); //Weird bug with ngAudio?
+                    API.load(_loadedTrack);
+
+                },
                 seek: function (pos) {
-                    if (audio)
+                    if (audio) {
                         audio.progress = pos;
+                        console.log(audio.progress);
+                    }
                 },
                 stat: {
                     loading: loading,
