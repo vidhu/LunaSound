@@ -51,6 +51,10 @@ app.on('ready', function () {
         console.log("key: MediaNextTrack");
         mainWindow.webContents.send('mediaCtrl', 'next');
     });
+    globalShortcut.register('MediaStop', () => {
+        console.log("key: MediaStop ");
+        mainWindow.webContents.send('mediaCtrl', 'stop');
+    });
 
 
     // Check whether a shortcut is registered.

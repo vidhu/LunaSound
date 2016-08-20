@@ -178,7 +178,7 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
             AudioService.load(track)
                 .then((url)=> {
                 AudioService.play();
-        });
+            });
         },
         playPrevious: function () {
             if(!nowPlaying) return;
@@ -190,7 +190,10 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
             AudioService.load(track)
                 .then((url)=> {
                 AudioService.play();
-        });
+            });
+        },
+        stop: function () {
+            AudioService.stop();
         },
         playSongByIndex: function (idx) {
             if(!nowPlaying) return;
@@ -228,6 +231,8 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
             API.playNext();
         } else if (message == 'prev') {
             API.playPrevious();
+        } else if (message == 'stop') {
+            AudioService.stop();
         }
     });
 

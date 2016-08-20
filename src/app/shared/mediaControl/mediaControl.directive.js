@@ -72,8 +72,10 @@
                 ctrl.progressChanging = true;
             },
             onEnd: function (sliderId, modelValue, highValue, pointerType) {
-                ctrl.sound.seek(modelValue / 1000);
-                ctrl.progressChanging = false;
+                if(ctrl.progressChanging) {
+                    ctrl.sound.seek((modelValue / 1000).toFixed(2));
+                    ctrl.progressChanging = false;
+                }
             }
         };
     }
