@@ -4,6 +4,7 @@ const filendir = require('filendir');
 const glob = require("glob");
 const async = require('async');
 const chokidar = require('chokidar');
+const electron = require('electron');
 
 exports.PlaylistModel = function () {
     function PlayListModel(id, name, songs) {
@@ -214,6 +215,20 @@ exports.PlaylistService = function ($rootScope, AudioService, LibraryService, Pl
     }, function (newValue) {
         if (newValue == 1)
             API.playNext();
+    });
+
+    electron.ipcRenderer.on('mediaCtrl', (event, message)=> {
+        if (message == 'playpause') {
+            if (AudioService.stat.paused) {
+                AudioService.play();
+            } else {
+                AudioService.pause();
+            }
+        } else if (message == 'next') {
+            API.playNext();
+        } else if (message == 'prev') {
+            API.playPrevious();
+        }
     });
 
     return API;

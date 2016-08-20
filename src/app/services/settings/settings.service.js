@@ -26,7 +26,7 @@
                 return config.getMusicDir();
             },
             saveMusicDir: function(dir){
-                config.saveMusicDir();
+                config.saveMusicDir(dir);
             }
         };
 
