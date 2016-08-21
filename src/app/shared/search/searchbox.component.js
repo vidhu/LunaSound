@@ -31,7 +31,7 @@
 
         ctrl.suggestionClick = function(suggestion) {
             ctrl.searchBoxBlur(true);
-            $state.go('search', {q: suggestion});
+            $state.go('main.search', {q: suggestion});
         };
 
         ctrl.key = function($event){
@@ -71,7 +71,7 @@
                 var searchTerm = ctrl.searchTerm;
                 ctrl.hideSuggestion = true;
                 liSelected = null;
-                $state.go('search', {q: searchTerm});
+                $state.go('main.search', {q: searchTerm});
             }
         }
     }
