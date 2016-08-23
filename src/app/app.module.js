@@ -41,6 +41,7 @@
             localStorageServiceProvider
                 .setPrefix('LunaSound')
                 .setNotify(true, true);
+
         })
         .run(function($rootScope, LibraryWatcher, PlaylistDB, editableOptions, Lastfm){
             LibraryWatcher.start();

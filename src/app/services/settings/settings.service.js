@@ -1,7 +1,7 @@
 (function(){
     'use strict'
     const path = require('path');
-    const config = require(path.join(process.env.BASE_DIR, 'core/config.js'));
+    const config = require(path.join(ENV.BASE_DIR, 'core/config.js'));
 
     angular.module('LunaSound.Settings')
         .factory('settings', settingsService);

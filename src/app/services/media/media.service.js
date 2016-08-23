@@ -161,12 +161,12 @@
         };
 
         API.prototype.extractAudio = function (memStream) {
-            ffmpeg.setFfmpegPath(process.env.ffmpeg);
+            ffmpeg.setFfmpegPath(ENV.ffmpeg);
 
             var completedDeferred = $q.defer();
 
             var filename = this.info.fulltitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.mp3';
-            this.file = path.join(process.env.MUSIC_DIR, filename);
+            this.file = path.join(ENV.MUSIC_DIR, filename);
             var cmd = ffmpeg({source: memStream});
             cmd.on('end', ()=> {
                 completedDeferred.resolve(this.file)
@@ -185,7 +185,7 @@
                 key: 'tPrbdkhM',
                 meta: 'recordings releasegroups compress',
                 fpcalc: {
-                    command: process.env.fpcalc
+                    command: ENV.fpcalc
                 }
             }, (err, result)=> {
                 if (err) completedDeferred.reject(err);

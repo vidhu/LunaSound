@@ -13,6 +13,7 @@
     "chromaprint": "^0.1.0",
     "devtron": "^1.2.1",
     "electron-connect": "^0.4.2",
+    "electron-cookies": "^1.1.0",
     "electron-debug": "^1.0.1",
     "ffmetadata": "^1.4.0",
     "filendir": "^1.0.0",

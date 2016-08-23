@@ -2,18 +2,11 @@ const electron = require('electron');
 const {BrowserWindow, ipcMain} = electron;
 const path = require('path');
 
-let displays = electron.screen.getAllDisplays();
-let externalDisplay = displays.find((display) => {
-    return display.bounds.x < 0 || display.bounds.y > 0
-});
-
 module.exports = {
     getBootWindow: function(){
         var win = null;
         if (process.env.NODE_ENV == 'development') {
             win = new BrowserWindow({
-                x: externalDisplay.bounds.x + 100,
-                y: externalDisplay.bounds.y + 100,
                 height: 300,
                 width: 533,
                 show: false
@@ -33,16 +26,14 @@ module.exports = {
         var win = null;
         if (process.env.NODE_ENV == 'development') {
             win = new BrowserWindow({
-                x: externalDisplay.bounds.x + 100,
-                y: externalDisplay.bounds.y + 100,
-                height: 768,
-                width: 1366,
+                height: 720,
+                width: 1280,
                 show: false
             });
         } else {
             win = new BrowserWindow({
-                height: 768,
-                width: 1366,
+                height: 720,
+                width: 1280,
                 frame: false,
                 show: false
             });

@@ -39,7 +39,7 @@ exports.LibraryService = function ($rootScope, $q) {
             var completedDeferred = $q.defer();
 
             var trackId = track.getId();
-            fs.unlink(path.join(process.env.MUSIC_DIR, trackId), function (er) {
+            fs.unlink(path.join(ENV.MUSIC_DIR, trackId), function (er) {
                 if (er) throw er;
 
                 delete tracks[trackId];

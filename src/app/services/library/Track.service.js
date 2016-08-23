@@ -15,7 +15,7 @@ module.exports = function TrackModel($q, $http) {
         };
 
         this.getRelativeURL = function (from) {
-            if (!from) from = process.env.MUSIC_DIR;
+            if (!from) from = ENV.MUSIC_DIR;
             return path.relative(from, this.URL);
         };
 
