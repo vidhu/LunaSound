@@ -2,12 +2,11 @@ const path = require('path');
 const nconf = require('nconf');
 const fs = require('fs');
 
-if(process.type === 'renderer'){
-    var configPath = path.join(ENV.USER_DATA, 'config.json');
-}else{
-    var configPath = path.join(process.env.USER_DATA, 'config.json');
+var ENV = window.ENV || {};
+if(!(process.type === 'renderer')) {
+    ENV = process.env;
 }
-
+let configPath = path.join(ENV.USER_DATA, 'config.json');
 
 nconf.argv()
     .env()
@@ -35,7 +34,7 @@ var API = {
     getMusicDir: function(){
         var musicDir = API.getSetting('dir:music');
         if(musicDir == null || musicDir == '')
-            musicDir = process.env.MUSIC_DIR;
+            musicDir = ENV.MUSIC_DIR;
         API.saveMusicDir(musicDir);
         return musicDir;
     },
