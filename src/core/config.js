@@ -2,7 +2,12 @@ const path = require('path');
 const nconf = require('nconf');
 const fs = require('fs');
 
-let configPath = path.join(process.env.USER_DATA, 'config.json');
+if(process.type === 'renderer'){
+    var configPath = path.join(ENV.USER_DATA, 'config.json');
+}else{
+    var configPath = path.join(process.env.USER_DATA, 'config.json');
+}
+
 
 nconf.argv()
     .env()
