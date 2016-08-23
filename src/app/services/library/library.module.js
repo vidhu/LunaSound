@@ -4,7 +4,7 @@
     const LibraryModule = require('./Library.service.js');
     const LibraryWatcher = require('./LibraryWatcher.service.js');
     const TrackModel = require('./Track.service.js');
-    const PlaylistModule = require('./PlayList.service.js');
+    const PlaylistModule = require('./Playlist.service.js');
     //console.log(LibraryWatcher);
     angular
         .module('LunaSound.Library', ['ui.router'])
