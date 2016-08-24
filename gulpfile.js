@@ -37,7 +37,7 @@ function build() {
             cache: './cache',
             version: 'v1.2.6',
             packaging: false,
-            platforms: ['win32-ia32', 'linux-x64']
+            platforms: ['win32-ia32']
         }))
         .pipe(gulp.dest(''));
 }
