@@ -24,7 +24,7 @@
     "musicmetadata": "^2.0.4",
     "nconf": "^0.8.4",
     "stream-buffers": "^3.0.0",
-    "youtube-dl": "^1.11.1",
+    "youtube-dl": "git+https://git@github.com/vidhu/node-youtube-dl.git",
     "ytdl-core": "^0.7.16"
   }
 }

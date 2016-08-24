@@ -134,7 +134,8 @@
             });
             var video = youtubedl(this.URL, [], {
                 start: downloaded,
-                cwd: __dirname
+                cwd: __dirname,
+                bin: ENV.youtubedl
             });
 
             video.on('info', (info)=> {
