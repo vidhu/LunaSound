@@ -35,9 +35,9 @@ function build() {
             packageJson: packageJson,
             release: './release',
             cache: './cache',
-            version: 'v1.2.6',
+            version: 'v1.3.4',
             packaging: false,
-            platforms: ['win32-ia32', 'linux-x64']
+            platforms: ['win32-x64', 'linux-x64']
         }))
         .pipe(gulp.dest(''));
 }
