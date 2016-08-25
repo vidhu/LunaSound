@@ -2,7 +2,7 @@
   "name": "luna-sound-dev-env",
   "version": "0.3.2",
   "author": "vidhu",
-  "description": "A beautiful opensource youtube music player"
+  "description": "A beautiful opensource youtube music player",
   "dependencies": {
     "bower": "^1.7.9",
     "browser-sync": "^2.13.0",
