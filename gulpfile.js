@@ -80,7 +80,7 @@ function build(cb) {
     return merge.apply(this, builds);
 }
 
-function makeIcon() {
+function makeIcon(cb) {
     rcedit('./release/v1.2.6/win32-ia32/lunasound.exe', {
         "version-string": packageJson.version,
         "file-version": packageJson.version,
