@@ -8,12 +8,13 @@ const gulpInject = require('gulp-inject');
 const rename = require("gulp-rename");
 const merge = require('merge-stream');
 const inno = require('gulp-inno');
+const debinstaller = require('electron-installer-debian')
 const electronConnect = require('electron-connect').server.create({path:'src'});
 const symdest = require('gulp-symdest');
 const electron = require('gulp-atom-electron');
 const rcedit = require('rcedit');
-const packageJson = JSON.parse(fs.readFileSync('./src/package.json'));
 
+const packageJson = JSON.parse(fs.readFileSync('./src/package.json'));
 
 gulp.task('scripts', scripts);
 gulp.task('inject', inject);
@@ -21,7 +22,8 @@ gulp.task('watch', watch);
 gulp.task('clean', clean);
 gulp.task('serve', gulp.series('inject', 'watch', electronServe));
 gulp.task('build', gulp.series('inject', 'clean', cleanDep, build, makeIcon));
-gulp.task('package', gulp.series('build', installer));
+gulp.task('package:win32', gulp.series('build', installer));
+gulp.task('package:deb', gulp.series('build', deb));
 
 
 function installer() {
@@ -29,6 +31,35 @@ function installer() {
         .pipe(inno({
             args:[`/Dversion=${packageJson.version}`]
         }));
+}
+
+function deb(cb) {
+	var options = {
+		src: 'release/build/linux-x64',
+	  	dest: 'release/installer',
+	  	arch: 'amd64',
+		productName: 'LunaSound',
+		genericName: 'Music Streaming',
+		description: packageJson.description,
+		version: packageJson.version,
+		section: 'sound',
+		maintainer: 'vidhu (vidhu@bu.edu)',
+		homepage: 'http://lunasound.io',
+		icon: 'src/assets/img/icon.png',
+		categories: ["Audio"],
+		depends: ["python"]
+	}
+
+	console.log('Creating package (this may take a while)')
+
+	debinstaller(options, function (err) {
+	  	if (err) {
+			console.error(err, err.stack)
+			cb(err);
+	  	}
+	  	console.log('Successfully created package at ' + options.dest)
+	  	cb();	
+	})
 }
 
 function cleanDep(cb) {
@@ -50,7 +81,7 @@ function build(cb) {
             winIcon: './src/assets/img/icon.ico',
             companyName: 'Vidhu'
         }))
-        .pipe(gulp.dest('./release/v1.2.6/win32-ia32'));
+        .pipe(gulp.dest('./release/build/win32-ia32'));
 
 
 
@@ -61,7 +92,7 @@ function build(cb) {
             arch: 'x64',
             linuxExecutableName: 'lunasound'
         }))
-        .pipe(gulp.dest('./release/v1.2.6/linux-x64'));
+        .pipe(gulp.dest('./release/build/linux-x64'));
 
     var builds = [win32, linux];
 
@@ -72,7 +103,7 @@ function build(cb) {
                 platform: 'darwin',
                 arch: 'x64'
             }))
-            .pipe(gulp.dest('./release/v1.2.6/linux-x64'));
+            .pipe(gulp.dest('./release/build/linux-x64'));
         builds.push(darwin);
     }
 
@@ -81,7 +112,7 @@ function build(cb) {
 }
 
 function makeIcon(cb) {
-    rcedit('./release/v1.2.6/win32-ia32/lunasound.exe', {
+    rcedit('./release/build/win32-ia32/lunasound.exe', {
         "version-string": packageJson.version,
         "file-version": packageJson.version,
         "product-version": packageJson.version,
@@ -90,6 +121,7 @@ function makeIcon(cb) {
         if(er) console.log(er);
         else console.log("modified exe");
         cb();
+
     });
 }
 
@@ -158,5 +190,5 @@ function electronReload(done) {
 }
 
 function clean() {
-    return del(['./release']);
+    return del(['./release/build']);
 }

@@ -23,7 +23,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=release
+OutputDir=release/installer
 OutputBaseFilename=lunasound-{#version}-setup
 Compression=lzma2/ultra
 SolidCompression=yes
@@ -35,7 +35,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "release\v1.2.6\win32-ia32\*"; Excludes: "*config.json"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "release\build\win32-ia32\*"; Excludes: "*config.json"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
