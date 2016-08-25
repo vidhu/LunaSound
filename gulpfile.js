@@ -1,13 +1,16 @@
 const gulp = require('gulp');
+const es = require('event-stream');
 const fs = require('fs');
 const del = require('del');
 const eslint = require('gulp-eslint');
 const wiredep = require('wiredep').stream;
 const gulpInject = require('gulp-inject');
 const rename = require("gulp-rename");
+const merge = require('merge-stream');
 const inno = require('gulp-inno');
 const electronConnect = require('electron-connect').server.create({path:'src'});
-const electron = require('gulp-electron');
+const symdest = require('gulp-symdest');
+const electron = require('gulp-atom-electron');
 const rcedit = require('rcedit');
 const packageJson = JSON.parse(fs.readFileSync('./src/package.json'));
 
@@ -17,7 +20,7 @@ gulp.task('inject', inject);
 gulp.task('watch', watch);
 gulp.task('clean', clean);
 gulp.task('serve', gulp.series('inject', 'watch', electronServe));
-gulp.task('build', gulp.series('inject', 'clean', build, makeIcon));
+gulp.task('build', gulp.series('inject', 'clean', cleanDep, build));
 gulp.task('package', gulp.series('build', installer));
 
 
@@ -28,21 +31,56 @@ function installer() {
         }));
 }
 
-function build() {
-    return gulp.src("./src")
-        .pipe(electron({
-            src: './src',
-            packageJson: packageJson,
-            release: './release',
-            cache: './cache',
-            version: 'v1.3.4',
-            packaging: false,
-            platforms: ['win32-x64', 'linux-x64']
-        }))
-        .pipe(gulp.dest(''));
+function cleanDep(cb) {
+    return del([
+        './src/node_modules/**/*.mp3',
+        './src/node_modules/**/*.exe',
+        './src/node_modules/**/*test*',
+        './src/bower_components/**/*test*'
+    ]);
 }
 
-function makeIcon(cb) {
+function build(cb) {
+
+    win32 = gulp.src(['src/**', '!src/lib/{mac,mac/**,linux,linux/**}'])
+        .pipe(electron({
+            version: '1.2.6',
+            platform: 'win32',
+            arch: 'ia32',
+            winIcon: './src/assets/img/icon.ico',
+            companyName: 'Vidhu'
+        }))
+        .pipe(gulp.dest('./release/v1.2.6/win32-ia32'));
+
+
+
+    var linux = gulp.src(['src/**', '!src/lib/{mac,mac/**,win32,win32/**}'])
+        .pipe(electron({
+            version: '1.2.6',
+            platform: 'linux',
+            arch: 'x64',
+            linuxExecutableName: 'lunasound'
+        }))
+        .pipe(gulp.dest('./release/v1.2.6/linux-x64'));
+
+    var builds = [win32, linux];
+
+    if(process.platform === 'darwin'){
+        var darwin = gulp.src(['src/**', '!src/lib/{linux,linux/**,win32,win32/**}'])
+            .pipe(electron({
+                version: '1.2.6',
+                platform: 'darwin',
+                arch: 'x64'
+            }))
+            .pipe(gulp.dest('./release/v1.2.6/linux-x64'));
+        builds.push(darwin);
+    }
+
+
+    return merge.apply(this, builds);
+}
+
+function makeIcon() {
     rcedit('./release/v1.2.6/win32-ia32/lunasound.exe', {
         "version-string": packageJson.version,
         "file-version": packageJson.version,
