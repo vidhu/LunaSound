@@ -103,7 +103,7 @@ function build(cb) {
                 platform: 'darwin',
                 arch: 'x64'
             }))
-            .pipe(gulp.dest('./release/build/linux-x64'));
+            .pipe(gulp.dest('./release/build/darwin-x64'));
         builds.push(darwin);
     }
 
