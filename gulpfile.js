@@ -20,7 +20,7 @@ gulp.task('inject', inject);
 gulp.task('watch', watch);
 gulp.task('clean', clean);
 gulp.task('serve', gulp.series('inject', 'watch', electronServe));
-gulp.task('build', gulp.series('inject', 'clean', cleanDep, build));
+gulp.task('build', gulp.series('inject', 'clean', cleanDep, build, makeIcon));
 gulp.task('package', gulp.series('build', installer));
 
 
