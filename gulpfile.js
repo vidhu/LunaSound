@@ -77,7 +77,7 @@ function cleanDep(cb) {
 
 function build(cb) {
 
-    win32 = gulp.src(['src/**', '!src/lib/{mac,mac/**,linux,linux/**}'])
+    var win32 = gulp.src(['src/**', '!src/lib/{mac,mac/**,linux,linux/**}'])
         .pipe(electron({
             version: '1.2.6',
             platform: 'win32',
