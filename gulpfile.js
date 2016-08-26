@@ -8,8 +8,12 @@ const gulpInject = require('gulp-inject');
 const rename = require("gulp-rename");
 const merge = require('merge-stream');
 const inno = require('gulp-inno');
-const debinstaller = require('electron-installer-debian')
-const electronConnect = require('electron-connect').server.create({path:'src'});
+try {
+    var debinstaller = require('electron-installer-debian');
+} catch (er) {
+    debinstaller = null;
+}
+const electronConnect = require('electron-connect').server.create({path: 'src'});
 const symdest = require('gulp-symdest');
 const electron = require('gulp-atom-electron');
 const rcedit = require('rcedit');
@@ -29,37 +33,37 @@ gulp.task('package:deb', gulp.series('build', deb));
 function installer() {
     return gulp.src('./lunasound-innoscript.iss')
         .pipe(inno({
-            args:[`/Dversion=${packageJson.version}`]
+            args: [`/Dversion=${packageJson.version}`]
         }));
 }
 
 function deb(cb) {
-	var options = {
-		src: 'release/build/linux-x64',
-	  	dest: 'release/installer',
-	  	arch: 'amd64',
-		productName: 'LunaSound',
-		genericName: 'Music Streaming',
-		description: packageJson.description,
-		version: packageJson.version,
-		section: 'sound',
-		maintainer: 'vidhu (vidhu@bu.edu)',
-		homepage: 'http://lunasound.io',
-		icon: 'src/assets/img/icon.png',
-		categories: ["Audio"],
-		depends: ["python"]
-	}
+    var options = {
+        src: 'release/build/linux-x64',
+        dest: 'release/installer',
+        arch: 'amd64',
+        productName: 'LunaSound',
+        genericName: 'Music Streaming',
+        description: packageJson.description,
+        version: packageJson.version,
+        section: 'sound',
+        maintainer: 'vidhu (vidhu@bu.edu)',
+        homepage: 'http://lunasound.io',
+        icon: 'src/assets/img/icon.png',
+        categories: ["Audio"],
+        depends: ["python"]
+    };
 
-	console.log('Creating package (this may take a while)')
+    console.log('Creating package (this may take a while)');
 
-	debinstaller(options, function (err) {
-	  	if (err) {
-			console.error(err, err.stack)
-			cb(err);
-	  	}
-	  	console.log('Successfully created package at ' + options.dest)
-	  	cb();	
-	})
+    debinstaller(options, function (err) {
+        if (err) {
+            console.error(err, err.stack);
+            cb(err);
+        }
+        console.log('Successfully created package at ' + options.dest);
+        cb();
+    })
 }
 
 function cleanDep(cb) {
@@ -84,7 +88,6 @@ function build(cb) {
         .pipe(gulp.dest('./release/build/win32-ia32'));
 
 
-
     var linux = gulp.src(['src/**', '!src/lib/{mac,mac/**,win32,win32/**}'])
         .pipe(electron({
             version: '1.2.6',
@@ -96,7 +99,7 @@ function build(cb) {
 
     var builds = [win32, linux];
 
-    if(process.platform === 'darwin'){
+    if (process.platform === 'darwin') {
         var darwin = gulp.src(['src/**', '!src/lib/{linux,linux/**,win32,win32/**}'])
             .pipe(electron({
                 version: '1.2.6',
@@ -117,8 +120,8 @@ function makeIcon(cb) {
         "file-version": packageJson.version,
         "product-version": packageJson.version,
         "icon": './src/assets/img/icon.ico'
-    }, function(er){
-        if(er) console.log(er);
+    }, function (er) {
+        if (er) console.log(er);
         else console.log("modified exe");
         cb();
 
