@@ -105,7 +105,7 @@ function build(cb) {
     var builds = [win32, linux];
 
     if (process.platform === 'darwin') {
-        var darwinExecs = filter(['src/lib/mac/**}'], {restore: true});
+        var darwinExecs = filter('src/lib/mac/**', {restore: true});
         var darwin = gulp.src(['src/**', '!src/lib/{linux,linux/**,win32,win32/**}'])
             .pipe(darwinExecs)
             .pipe(chmod(777))
