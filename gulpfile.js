@@ -3,11 +3,13 @@ const es = require('event-stream');
 const fs = require('fs');
 const del = require('del');
 const eslint = require('gulp-eslint');
+const filter = require('gulp-filter');
 const wiredep = require('wiredep').stream;
 const gulpInject = require('gulp-inject');
 const rename = require("gulp-rename");
 const merge = require('merge-stream');
 const inno = require('gulp-inno');
+const chmod = require('gulp-chmod');
 try {
     var debinstaller = require('electron-installer-debian');
 } catch (er) {
@@ -77,6 +79,7 @@ function cleanDep(cb) {
 
 function build(cb) {
 
+
     var win32 = gulp.src(['src/**', '!src/lib/{mac,mac/**,linux,linux/**}'])
         .pipe(electron({
             version: '1.2.6',
@@ -87,8 +90,11 @@ function build(cb) {
         }))
         .pipe(gulp.dest('./release/build/win32-ia32'));
 
-
+    var linuxExecs = filter(['src/lib/linux/**}'], {restore: true});
     var linux = gulp.src(['src/**', '!src/lib/{mac,mac/**,win32,win32/**}'])
+        .pipe(linuxExecs)
+        .pipe(chmod(777))
+        .pipe(linuxExecs.restore)
         .pipe(electron({
             version: '1.2.6',
             platform: 'linux',
@@ -100,7 +106,11 @@ function build(cb) {
     var builds = [win32, linux];
 
     if (process.platform === 'darwin') {
+        var darwinExecs = filter(['src/lib/mac/**}'], {restore: true});
         var darwin = gulp.src(['src/**', '!src/lib/{linux,linux/**,win32,win32/**}'])
+            .pipe(darwinExecs)
+            .pipe(chmod(777))
+            .pipe(darwinExecs.restore)
             .pipe(electron({
                 version: '1.2.6',
                 platform: 'darwin',
