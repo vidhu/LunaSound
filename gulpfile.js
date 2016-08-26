@@ -31,7 +31,6 @@ gulp.task('build', gulp.series('inject', 'clean', cleanDep, build, makeIcon));
 gulp.task('package:win32', gulp.series('build', installer));
 gulp.task('package:deb', gulp.series('build', deb));
 
-
 function installer() {
     return gulp.src('./lunasound-innoscript.iss')
         .pipe(inno({
@@ -90,7 +89,7 @@ function build(cb) {
         }))
         .pipe(gulp.dest('./release/build/win32-ia32'));
 
-    var linuxExecs = filter(['src/lib/linux/**}'], {restore: true});
+    var linuxExecs = filter('src/lib/linux/**', {restore: true});
     var linux = gulp.src(['src/**', '!src/lib/{mac,mac/**,win32,win32/**}'])
         .pipe(linuxExecs)
         .pipe(chmod(777))
