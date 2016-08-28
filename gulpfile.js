@@ -107,9 +107,11 @@ function build(cb) {
 	if(process.platform == 'win32'){
 		builds.push(win32);
 	}
-	commandExists('ls', function(err, commandExists) {
+	commandExists('wine', function(err, commandExists) {
 		if(commandExists) {
 		    builds.push(win32);
+		}else{
+			console.log("wine doesn't exist. Skipping win32 build");
 		}
 	});
 
@@ -134,17 +136,27 @@ function build(cb) {
 }
 
 function makeIcon(cb) {
-    rcedit('./release/build/win32-ia32/lunasound.exe', {
-        "version-string": packageJson.version,
-        "file-version": packageJson.version,
-        "product-version": packageJson.version,
-        "icon": './src/assets/img/icon.ico'
-    }, function (er) {
-        if (er) console.log(er);
-        else console.log("modified exe");
-        cb();
-
-    });
+	var wineExist = false;
+	commandExists('wine', function(err, commandExists) {
+		if(commandExists) {
+		    wineExist = true;
+		}else{
+			console.log("wine doesn't exist. Skipping task 'makeIcon'");
+			cb()
+		}
+	});
+	if(wineExist){
+		rcedit('./release/build/win32-ia32/lunasound.exe', {
+		    "version-string": packageJson.version,
+		    "file-version": packageJson.version,
+		    "product-version": packageJson.version,
+		    "icon": './src/assets/img/icon.ico'
+		}, function (er) {
+		    if (er) console.log(er);
+		    else console.log("modified exe");
+		    cb();
+		});
+	}
 }
 
 function scripts() {
