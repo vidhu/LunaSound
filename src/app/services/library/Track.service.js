@@ -1,4 +1,4 @@
-module.exports = function TrackModel($q, $http) {
+module.exports = function TrackModel($q, $http, settings) {
     const path = require('path');
     const youtubedl = require('youtube-dl');
 

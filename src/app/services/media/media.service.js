@@ -13,7 +13,7 @@
     angular.module('LunaSound.Media')
         .factory('MediaService', MediaService);
 
-    function MediaService($q, $rootScope) {
+    function MediaService($q, $rootScope, settings) {
         var saveDir = __dirname + '/music/';
 
         var downloadQueue = [];
