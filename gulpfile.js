@@ -136,27 +136,26 @@ function build(cb) {
 }
 
 function makeIcon(cb) {
-	var wineExist = false;
 	commandExists('wine', function(err, commandExists) {
 		if(commandExists) {
-		    wineExist = true;
+      rcedit('./release/build/win32-ia32/lunasound.exe', {
+          "version-string": packageJson.version,
+          "file-version": packageJson.version,
+          "product-version": packageJson.version,
+          "icon": './src/assets/img/icon.ico'
+      }, function (er) {
+          if (er){
+              console.log(er);
+              cb(er);
+          }
+          else console.log("modified exe");
+          cb();
+      });
 		}else{
 			console.log("wine doesn't exist. Skipping task 'makeIcon'");
 			cb()
 		}
 	});
-	if(wineExist){
-		rcedit('./release/build/win32-ia32/lunasound.exe', {
-		    "version-string": packageJson.version,
-		    "file-version": packageJson.version,
-		    "product-version": packageJson.version,
-		    "icon": './src/assets/img/icon.ico'
-		}, function (er) {
-		    if (er) console.log(er);
-		    else console.log("modified exe");
-		    cb();
-		});
-	}
 }
 
 function scripts() {
