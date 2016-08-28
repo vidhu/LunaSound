@@ -69,7 +69,7 @@ module.exports = function (settings, LibraryService, Track) {
             console.log(event, filepath);
         });
 
-        watcher.on('deleted', (event, filepath)=> {
+        watcher.on('unlink', (event, filepath)=> {
             var key = path.basename(filepath);
             LibraryService.removeTrack(key);
         });
