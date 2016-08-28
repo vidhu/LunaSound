@@ -49,7 +49,7 @@ function deb(cb) {
         description: packageJson.description,
         version: packageJson.version,
         section: 'sound',
-        maintainer: 'vidhu (vidhu@bu.edu)',
+        maintainer: 'vidhu <vidhu@bu.edu>',
         homepage: 'http://lunasound.io',
         icon: 'src/assets/img/icon.png',
         categories: ["Audio"],
