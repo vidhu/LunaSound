@@ -47,7 +47,6 @@ module.exports = function (settings, LibraryService, Track) {
         //Watch for any changes
         watcher = chokidar.watch('*.mp3', {
             cwd: MUSIC_DIR,
-            ignored: /[\/\\]\./,
             ignoreInitial: true,
         });
 

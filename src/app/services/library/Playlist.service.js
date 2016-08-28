@@ -274,8 +274,7 @@ exports.PlaylistDB = function ($q, $rootScope, settings, PlaylistModel, LibraryS
             $rootScope.$broadcast('Playlist:Change', null);
 
             watcher = chokidar.watch('**/*.m3u', {
-                cwd: PL_DIR,
-                ignored: /[\/\\]\./
+                cwd: PL_DIR
             });
 
             watcher.on('all', (event, filename)=> {

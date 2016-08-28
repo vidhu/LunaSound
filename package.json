@@ -6,6 +6,7 @@
   "dependencies": {
     "bower": "^1.7.9",
     "browser-sync": "^2.13.0",
+    "command-exists": "^1.0.2",
     "del": "^2.2.1",
     "electron-connect": "^0.4.2",
     "electron-prebuilt": "^1.2.4",

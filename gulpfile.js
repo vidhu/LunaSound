@@ -19,6 +19,7 @@ const electronConnect = require('electron-connect').server.create({path: 'src'})
 const symdest = require('gulp-symdest');
 const electron = require('gulp-atom-electron');
 const rcedit = require('rcedit');
+const commandExists = require('command-exists');
 
 const packageJson = JSON.parse(fs.readFileSync('./src/package.json'));
 
@@ -102,7 +103,16 @@ function build(cb) {
         }))
         .pipe(gulp.dest('./release/build/linux-x64'));
 
-    var builds = [win32, linux];
+    var builds = [linux];
+	if(process.platform == 'win32'){
+		builds.push(win32);
+	}
+	commandExists('ls', function(err, commandExists) {
+		if(commandExists) {
+		    builds.push(win32);
+		}
+	});
+
 
     if (process.platform === 'darwin') {
         var darwinExecs = filter('src/lib/mac/**', {restore: true});
