@@ -167,7 +167,7 @@
             var completedDeferred = $q.defer();
 
             var filename = this.info.fulltitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.mp3';
-            this.file = path.join(ENV.MUSIC_DIR, filename);
+            this.file = path.join(settings.getMusicDir(), filename);
             var cmd = ffmpeg({source: memStream});
             cmd.on('end', ()=> {
                 completedDeferred.resolve(this.file)

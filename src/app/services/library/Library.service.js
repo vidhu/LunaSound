@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-exports.LibraryService = function ($rootScope, $q) {
+exports.LibraryService = function ($rootScope, $q, settings) {
     var tracks = {};
 
     function notifyLibraryChange() {
@@ -39,7 +39,7 @@ exports.LibraryService = function ($rootScope, $q) {
             var completedDeferred = $q.defer();
 
             var trackId = track.getId();
-            fs.unlink(path.join(ENV.MUSIC_DIR, trackId), function (er) {
+            fs.unlink(path.join(settings.getMusicDir(), trackId), function (er) {
                 if (er) throw er;
 
                 delete tracks[trackId];
