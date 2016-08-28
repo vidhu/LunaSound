@@ -43,9 +43,19 @@ Planned Features for next major update
     bower install
 
 ###Build
+#####Prerequisites
+
+    nodejs, gulp 4.0, bower, wine (building windows binary)
+
 Building the application
 
     gulp build
+
+ - When building on windows, only **win32** and **linux** binaries are created
+ - When building on linux, only **linux** binaries are created
+   - If [wine](https://www.winehq.org/) is installed, **win32** binaries will also be created
+ - When building on **OSX**, only **linux** and **OSX** binaries are created
+   - If [wine](https://www.winehq.org/) is installed, **win32** binaries will also be created
 
 Running the development version. *Any changes to the source will automatically be
 reflected in the application process.*
@@ -55,7 +65,12 @@ reflected in the application process.*
 ###Packaging
 Packaging the application for distribution
 
-    gulp package
+    gulp package:win32
+    gulp package:deb
+
+ - deb creates a debian compatible package for installation and distribution
+ - win32 creates a innosetup installer
+ - OSX application file is created during build and therefore doesn't require a packageing step
 
 ##Contribution
 This project is still at its infancy and without any clear roadmap. Therefore,
