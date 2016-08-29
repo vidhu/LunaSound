@@ -1,6 +1,7 @@
 module.exports = function TrackModel($q, $http, settings) {
     const path = require('path');
     const youtubedl = require('youtube-dl');
+    youtubedl.setBinPath(ENV.youtubedl);
 
     function Track(data) {
         this.URL = data.URL;
