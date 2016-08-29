@@ -125,7 +125,8 @@ function build(cb) {
             .pipe(electron({
                 version: '1.2.6',
                 platform: 'darwin',
-                arch: 'x64'
+                arch: 'x64',
+                darwinIcon: './src/assets/img/icon.icns'
             }))
             .pipe(gulp.dest('./release/build/darwin-x64'));
         builds.push(darwin);
