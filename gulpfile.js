@@ -108,7 +108,7 @@ function build(cb) {
         builds.push(win32);
     }
     commandExists('wine', function (err, commandExists) {
-        if (commandExists) {
+        if (commandExists || process.platform == 'win32') {
             builds.push(win32);
         } else {
             console.log("wine doesn't exist. Skipping win32 build");
