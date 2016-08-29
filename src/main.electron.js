@@ -10,8 +10,20 @@ require('electron-debug')({ enabled: true });
 process.env.BASE_DIR = __dirname;
 process.env.USER_DATA = path.join(app.getPath('appData'), 'lunasound');
 process.env.MUSIC_DIR = path.join(process.env.USER_DATA, 'music');
-process.env.ffmpeg = path.join(__dirname, 'lib/ffmpeg/ffmpeg.exe');
-process.env.fpcalc = path.join(__dirname, '/lib/fpcalc/fpcalc.exe');
+
+if(process.platform === 'win32') {
+	process.env.ffmpeg = path.join(__dirname, 'lib/win32/ffmpeg/ffmpeg.exe');
+	process.env.fpcalc = path.join(__dirname, 'lib/win32/fpcalc/fpcalc.exe');
+    process.env.youtubedl = path.join(__dirname, 'lib/win32/youtube-dl/youtube-dl.exe');
+}else if(process.platform === 'linux') {
+	process.env.ffmpeg = path.join(__dirname, 'lib/linux/ffmpeg/ffmpeg');
+	process.env.fpcalc = path.join(__dirname, 'lib/linux/fpcalc/fpcalc');
+    process.env.youtubedl = path.join(__dirname, 'lib/linux/youtube-dl/youtube-dl');
+}else if(process.platform === 'darwin') {
+    process.env.ffmpeg = path.join(__dirname, 'lib/mac/ffmpeg/ffmpeg');
+    process.env.fpcalc = path.join(__dirname, 'lib/mac/fpcalc/fpcalc');
+    process.env.youtubedl = path.join(__dirname, 'lib/mac/youtube-dl/youtube-dl');
+}
 
 //Create USER_DATA dir if doesn't exists
 if (!fs.existsSync(process.env.USER_DATA)){

@@ -13,7 +13,7 @@
     angular.module('LunaSound.Media')
         .factory('MediaService', MediaService);
 
-    function MediaService($q, $rootScope) {
+    function MediaService($q, $rootScope, settings) {
         var saveDir = __dirname + '/music/';
 
         var downloadQueue = [];
@@ -134,7 +134,8 @@
             });
             var video = youtubedl(this.URL, [], {
                 start: downloaded,
-                cwd: __dirname
+                cwd: __dirname,
+                bin: ENV.youtubedl
             });
 
             video.on('info', (info)=> {
@@ -166,7 +167,7 @@
             var completedDeferred = $q.defer();
 
             var filename = this.info.fulltitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.mp3';
-            this.file = path.join(ENV.MUSIC_DIR, filename);
+            this.file = path.join(settings.getMusicDir(), filename);
             var cmd = ffmpeg({source: memStream});
             cmd.on('end', ()=> {
                 completedDeferred.resolve(this.file)

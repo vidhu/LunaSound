@@ -1,9 +1,9 @@
-(function(){
+(function () {
 
     const remote = require('electron').remote;
 
     angular.module('LunaSound')
-        .directive('chrome', function(){
+        .directive('chrome', function () {
             return {
                 restrict: 'E',
                 templateUrl: './shared/chrome/chrome.directive.html',
@@ -13,15 +13,15 @@
             }
         });
 
-    function ChromeController(){
+    function ChromeController() {
         var vm = this;
 
-        vm.close = function(){
+        vm.close = function () {
             var window = remote.getCurrentWindow();
             window.close();
         };
 
-        vm.max = function(){
+        vm.max = function () {
             var window = remote.getCurrentWindow();
             if (!window.isMaximized()) {
                 window.maximize();
@@ -30,9 +30,13 @@
             }
         };
 
-        vm.min = function(){
+        vm.min = function () {
             var window = remote.getCurrentWindow();
             window.minimize();
-        }
+        };
+
+        vm.dev = function () {
+            require('electron').remote.getCurrentWindow().toggleDevTools();
+        };
     }
 })();

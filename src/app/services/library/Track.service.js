@@ -1,4 +1,4 @@
-module.exports = function TrackModel($q, $http) {
+module.exports = function TrackModel($q, $http, settings) {
     const path = require('path');
     const youtubedl = require('youtube-dl');
 
@@ -15,7 +15,7 @@ module.exports = function TrackModel($q, $http) {
         };
 
         this.getRelativeURL = function (from) {
-            if (!from) from = ENV.MUSIC_DIR;
+            if (!from) from = settings.getMusicDir();
             return path.relative(from, this.URL);
         };
 

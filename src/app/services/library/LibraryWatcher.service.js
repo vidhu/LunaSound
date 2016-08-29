@@ -47,7 +47,6 @@ module.exports = function (settings, LibraryService, Track) {
         //Watch for any changes
         watcher = chokidar.watch('*.mp3', {
             cwd: MUSIC_DIR,
-            ignored: /[\/\\]\./,
             ignoreInitial: true,
         });
 
@@ -70,7 +69,7 @@ module.exports = function (settings, LibraryService, Track) {
             console.log(event, filepath);
         });
 
-        watcher.on('deleted', (event, filepath)=> {
+        watcher.on('unlink', (filepath)=> {
             var key = path.basename(filepath);
             LibraryService.removeTrack(key);
         });
