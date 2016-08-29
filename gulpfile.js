@@ -104,16 +104,16 @@ function build(cb) {
         .pipe(gulp.dest('./release/build/linux-x64'));
 
     var builds = [linux];
-	if(process.platform == 'win32'){
-		builds.push(win32);
-	}
-	commandExists('wine', function(err, commandExists) {
-		if(commandExists) {
-		    builds.push(win32);
-		}else{
-			console.log("wine doesn't exist. Skipping win32 build");
-		}
-	});
+    if (process.platform == 'win32') {
+        builds.push(win32);
+    }
+    commandExists('wine', function (err, commandExists) {
+        if (commandExists) {
+            builds.push(win32);
+        } else {
+            console.log("wine doesn't exist. Skipping win32 build");
+        }
+    });
 
 
     if (process.platform === 'darwin') {
@@ -137,26 +137,26 @@ function build(cb) {
 }
 
 function makeIcon(cb) {
-	commandExists('wine', function(err, commandExists) {
-		if(commandExists) {
-      rcedit('./release/build/win32-ia32/lunasound.exe', {
-          "version-string": packageJson.version,
-          "file-version": packageJson.version,
-          "product-version": packageJson.version,
-          "icon": './src/assets/img/icon.ico'
-      }, function (er) {
-          if (er){
-              console.log(er);
-              cb(er);
-          }
-          else console.log("modified exe");
-          cb();
-      });
-		}else{
-			console.log("wine doesn't exist. Skipping task 'makeIcon'");
-			cb()
-		}
-	});
+    commandExists('wine', function (err, commandExists) {
+        if (commandExists || process.platform == 'win32') {
+            rcedit('./release/build/win32-ia32/lunasound.exe', {
+                "version-string": packageJson.version,
+                "file-version": packageJson.version,
+                "product-version": packageJson.version,
+                "icon": './src/assets/img/icon.ico'
+            }, function (er) {
+                if (er) {
+                    console.log(er);
+                    cb(er);
+                }
+                else console.log("modified exe");
+                cb();
+            });
+        } else {
+            console.log("wine doesn't exist. Skipping task 'makeIcon'");
+            cb()
+        }
+    });
 }
 
 function scripts() {
