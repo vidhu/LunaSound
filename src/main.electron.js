@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 require('electron-debug')({ enabled: true });
 
-const packageJson = JSON.parse(fs.readFileSync('package.json'));
+const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json')));
 
 //Set Variables
 process.env.version = packageJson.version;
