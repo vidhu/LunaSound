@@ -23,6 +23,7 @@
     "memorystream": "^0.3.1",
     "musicmetadata": "^2.0.4",
     "nconf": "^0.8.4",
+    "semver-compare": "^1.0.0",
     "stream-buffers": "^3.0.0",
     "youtube-dl": "git+https://git@github.com/vidhu/node-youtube-dl.git",
     "ytdl-core": "^0.7.16"

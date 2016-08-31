@@ -1,5 +1,4 @@
 'use strict';
-
 const electron = require('electron');
 const {app, globalShortcut} = electron;
 
@@ -7,6 +6,12 @@ const path = require('path');
 const fs = require('fs');
 require('electron-debug')({ enabled: true });
 
+const packageJson = JSON.parse(fs.readFileSync('package.json'));
+
+//Set Variables
+process.env.version = packageJson.version;
+
+//Set directories
 process.env.BASE_DIR = __dirname;
 process.env.USER_DATA = path.join(app.getPath('appData'), 'lunasound');
 process.env.MUSIC_DIR = path.join(process.env.USER_DATA, 'music');
