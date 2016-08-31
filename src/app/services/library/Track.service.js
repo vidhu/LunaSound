@@ -40,7 +40,7 @@ module.exports = function TrackModel($q, $http, settings) {
                         deferred.resolve(this.streamableURL);
                     });
                 }
-            } else if(this.URL == '') {
+            } else if(this.getType() == 'youtube-nostream') {
                 //Attempt to find youtube URL
                 $http.get('https://www.listenvideo.com/search-audio/'+ this.tag.title + '/' + this.tag.artist[0])
                 .then((response)=>{
@@ -58,7 +58,10 @@ module.exports = function TrackModel($q, $http, settings) {
         };
 
         this.getType = function(){
-            //type: {local, youtube}
+            //type: {local, youtube, youtube-nostream}
+            if(this.URL == ''){
+                return 'youtube-nostream';
+            }
             var re = new RegExp("^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+");
             if(re.test(this.URL)){
                 return 'youtube';

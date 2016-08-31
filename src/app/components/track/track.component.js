@@ -110,6 +110,8 @@
             }else{
                 ctrl.menuOptions.push(['Add to Playlist', function ($itemScope) {
                     // Code
+                }, function($itemScope){
+                    return $itemScope.track.getType() == 'local';
                 }, ctrl.playlistMenu]);
             }
             if(ctrl.config.enableEditing){
@@ -121,11 +123,14 @@
                     }],
                     ['Edit', function ($itemScope) {
                         editTrack($itemScope.track);
+                    }, function ($itemScope) {
+                        return  $itemScope.track.getType() == 'local';
                     }],
                     ['Delete', function ($itemScope) {
                         deleteTrack($itemScope.track);
                     }, function ($itemScope) {
-                        return ctrl.getCurrentTrackIndex() != $itemScope.$index;
+                        return (ctrl.getCurrentTrackIndex() != $itemScope.$index)
+                            && $itemScope.track.getType() == 'local';
                     }]
                 ]);
             }
