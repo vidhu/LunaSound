@@ -1,6 +1,7 @@
 (function () {
 
     const remote = require('electron').remote;
+    const shell = require('electron').shell;
 
     angular.module('LunaSound')
         .directive('chrome', function () {
@@ -38,5 +39,9 @@
         vm.dev = function () {
             require('electron').remote.getCurrentWindow().toggleDevTools();
         };
+
+        vm.open = function (url) {
+            shell.openExternal(url);
+        }
     }
 })();

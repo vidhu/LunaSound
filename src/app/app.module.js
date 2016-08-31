@@ -24,6 +24,7 @@
         'LunaSound.Lastfm',
         'LunaSound.Settings',
         'ui.router',
+        'ui-notification',
         'LocalStorageModule',
         'ngSanitize',
         'rzModule',
@@ -37,13 +38,29 @@
         .config(routeConfig)
         .constant('_', window._)
         .constant('$', window.$)
-        .config(function(localStorageServiceProvider){
+        .config(function(localStorageServiceProvider, NotificationProvider){
             localStorageServiceProvider
                 .setPrefix('LunaSound')
                 .setNotify(true, true);
 
+            NotificationProvider.setOptions({
+                delay: 10000,
+                startTop: 20,
+                startRight: 10,
+                verticalSpacing: 10,
+                horizontalSpacing: 10,
+                positionX: 'right',
+                positionY: 'bottom',
+                maxCount: 5
+            });
+
         })
-        .run(function($rootScope, LibraryWatcher, PlaylistDB, editableOptions, Lastfm){
+        .run(function($rootScope, LibraryWatcher, PlaylistDB, editableOptions, Lastfm, Update){
+            Update.isUpdateAvailable()
+                .then((available)=>{
+                    if(available) Update.notify();
+                });
+
             LibraryWatcher.start();
             PlaylistDB.watch();
 
@@ -58,6 +75,7 @@
         });
 
     //Modules - LunaSound NameSpace
+    require('./services/update/update.service.js');
     require('./services/settings/settings.service.js');
     require('./shared/search/searchbox.component.js');
     require('./shared/topBar/topBar.directive.js');
