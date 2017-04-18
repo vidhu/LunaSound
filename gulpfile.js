@@ -13,6 +13,7 @@ const chmod = require('gulp-chmod');
 try {
     var debinstaller = require('electron-installer-debian');
 } catch (er) {
+    console.log(er);
     debinstaller = null;
 }
 const electronConnect = require('electron-connect').server.create({path: 'src'});
