@@ -1,6 +1,6 @@
 {
   "name": "lunasound",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Youtube Music Player",
   "main": "main.electron.js",
   "author": "vidhu",
