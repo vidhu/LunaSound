@@ -1,10 +1,10 @@
-#LunaSound
+# LunaSound
 LunaSound is a music player built using web frontend technologies and powered
 by Electron to concieve a beautiful responsive music player.
 
 ![LunaSound ScreenShot](http://i.imgur.com/ySbqmUS.png)
 
-##Features
+## Features
 * Basic music player features (playlist/play queue/library management)
 * Download from Youtube
   - Automatically download mp3 from youtube URLs
@@ -16,8 +16,8 @@ Planned Features for next major update
 - [x] Frontpage for Tracks
 - [x] Artist's Pages and Tracks
 
-##Technologies Used
-###Application
+## Technologies Used
+### Application
 * Electron
 * AngularJs 1.5
 * EMCAScript 5 for Chrome V8
@@ -27,14 +27,14 @@ Planned Features for next major update
 * ffmpeg
 * fpcalc (Chromaprint)
 
-###Build Framework
+### Build Framework
 * Gulp
 * Bower
 * Node.Js
 * eslint
 
-##Build Instructions
-###Install
+## Build Instructions
+### Install
 
     git clone https://github.com/vidhu/LunaSound.git
     npm install
@@ -42,8 +42,8 @@ Planned Features for next major update
     npm install
     bower install
 
-###Build
-#####Prerequisites
+### Build
+##### Prerequisites
 
     nodejs, gulp 4.0, bower, wine (building windows binary)
 
@@ -62,7 +62,7 @@ reflected in the application process.*
 
     gulp serve
 
-###Packaging
+### Packaging
 Packaging the application for distribution
 
     gulp package:win32
@@ -72,7 +72,7 @@ Packaging the application for distribution
  - win32 creates a innosetup installer
  - OSX application file is created during build and therefore doesn't require a packageing step
 
-##Contribution
+## Contribution
 This project is still at its infancy and without any clear roadmap. Therefore,
 I will not be accepting any major changes to the application. Things like bug fixes
 will definitly be considered.
