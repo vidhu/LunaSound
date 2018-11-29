@@ -1,4 +1,6 @@
-# LunaSound
+# LunaSound (Discontinued)
+*This project has been discontinued for various reasons but primarily because Angular.js (pre 2.0) is not supported anymore and infamously; hard to use. LunaSound 2 is now being activly developed in React.JS*
+
 LunaSound is a music player built using web frontend technologies and powered
 by Electron to concieve a beautiful responsive music player.
 
